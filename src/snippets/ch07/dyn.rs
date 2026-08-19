@@ -18,7 +18,7 @@ impl Step for XorMix {
     }
 }
 
-// 同じ2種類の処理を enum でも表現する
+// 같은 두 종류의 작업을 enum으로도 표현합니다
 enum StepE {
     AddOne,
     XorMix,
@@ -35,7 +35,7 @@ impl StepE {
 fn main() {
     let n = 10_000_000usize;
 
-    // 中身の型が実行時にしか決まらない、種類の混ざったリスト
+    // 실제 타입이 실행 시점에 결정되는 서로 다른 종류가 섞인 리스트
     let dyns: Vec<Box<dyn Step>> = (0..n)
         .map(|i| -> Box<dyn Step> {
             if i % 2 == 0 { Box::new(AddOne) } else { Box::new(XorMix) }
