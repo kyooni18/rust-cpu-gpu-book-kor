@@ -2,7 +2,7 @@ use std::sync::mpsc;
 use std::time::Instant;
 
 fn main() {
-    // 2スレッドがチャネルで打ち返し合う。1往復 = 2回のスレッド起床
+    // 두 스레드가 채널로 값을 주고받습니다. 한 번 왕복할 때 스레드 깨우기가 두 번 발생합니다
     let rounds = 100_000;
     let (tx1, rx1) = mpsc::channel::<u64>();
     let (tx2, rx2) = mpsc::channel::<u64>();
@@ -23,7 +23,7 @@ fn main() {
     let t = start.elapsed();
     handle.join().unwrap();
     println!(
-        "{rounds}往復: {t:?} (1往復あたり {:5.2}µs, v={v})",
+        "{rounds}회 왕복: {t:?} (왕복 1회당 {:5.2}µs, v={v})",
         t.as_nanos() as f64 / rounds as f64 / 1000.0
     );
 }
