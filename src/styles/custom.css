@@ -1,4 +1,4 @@
-/* ---- RustPlay: インタラクティブ実行ブロック ---- */
+/* ---- RustPlay: 대화형 실행 블록 ---- */
 .rust-play {
   margin: 1rem 0;
   border: 1px solid var(--sl-color-gray-5);
@@ -25,8 +25,8 @@
   font-size: var(--sl-text-sm);
 }
 
-/* Starlightが本文中の隣接要素に付けるmargin-topを打ち消す
-   (ボタン等がツールバー内で縦にずれるのを防ぐ) */
+/* Starlight가 본문 안의 인접 요소에 추가하는 margin-top을 제거합니다.
+   버튼 같은 요소가 툴바 안에서 세로로 어긋나는 것을 막습니다 */
 .rust-play > *,
 .rust-play__toolbar > * {
   margin-top: 0 !important;
@@ -127,12 +127,12 @@
   color: var(--sl-color-red, #f7768e);
 }
 
-/* ---- 用語(初出)の強調 ---- */
+/* ---- 용어 첫 등장 강조 ---- */
 .term {
   font-weight: 600;
 }
 
-/* ---- 手書きSVG図のテーマ対応 ---- */
+/* ---- 인라인 SVG 그림의 테마 대응 ---- */
 .book-figure {
   margin: 1.5rem auto;
   text-align: center;
