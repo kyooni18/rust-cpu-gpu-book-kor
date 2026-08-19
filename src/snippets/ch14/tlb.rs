@@ -12,7 +12,7 @@ fn main() {
         sum = sum.wrapping_add(buf[pos] as u64);
         pos = (pos + 64) % size;
     }
-    println!("64Bおき (ライン単位): {:>9.3?} (sum={sum})", start.elapsed());
+    println!("64B 간격 (캐시 라인 단위): {:>9.3?} (sum={sum})", start.elapsed());
 
     let start = Instant::now();
     let mut sum = 0u64;
@@ -21,5 +21,5 @@ fn main() {
         sum = sum.wrapping_add(buf[pos] as u64);
         pos = (pos + 4096 + 64) % size;
     }
-    println!("4KBおき (ページ単位): {:>9.3?} (sum={sum})", start.elapsed());
+    println!("4KB 간격 (페이지 단위)  : {:>9.3?} (sum={sum})", start.elapsed());
 }
