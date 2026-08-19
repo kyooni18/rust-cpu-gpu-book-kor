@@ -3,7 +3,7 @@ use std::hint::black_box;
 use std::time::Instant;
 
 fn main() {
-    // 0..1000万の範囲の整数200万個の「所属判定」を2000万回
+    // 0..1,000만 범위의 정수 200만 개에 대해 포함 여부를 2,000만 번 검사합니다
     let range = 10_000_000u32;
     let members: Vec<u32> = (0..range).filter(|x| x % 5 == 0).collect();
     let queries = 20_000_000u32;
@@ -20,7 +20,7 @@ fn main() {
         let q = i % range;
         if set.contains(&q) { count += 1; }
     }
-    println!("HashSet : {:>9.3?} (count={count})", start.elapsed());
+    println!("HashSet: {:>9.3?} (count={count})", start.elapsed());
 
     let start = Instant::now();
     let mut count = 0u32;
@@ -28,6 +28,6 @@ fn main() {
         let q = i % range;
         if bits[(q / 64) as usize] & (1 << (q % 64)) != 0 { count += 1; }
     }
-    println!("ビット列: {:>9.3?} (count={count})", start.elapsed());
+    println!("비트셋 : {:>9.3?} (count={count})", start.elapsed());
     black_box(count);
 }
