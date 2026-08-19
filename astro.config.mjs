@@ -6,12 +6,12 @@ import mermaid from 'astro-mermaid';
 export default defineConfig({
   site: 'https://rust-cpu-gpu-book.void.app',
   integrations: [
-    // astro-mermaid は markdown 処理系より先に登録する
+    // astro-mermaid는 markdown 처리보다 먼저 등록합니다
     mermaid({ autoTheme: true }),
     starlight({
-      title: 'RustではじめるCPUとGPU',
+      title: 'Rust로 시작하는 CPU와 GPU',
       description:
-        'Webアプリケーション開発者のための、RustでたどるCPU・GPUの教科書',
+        '웹 애플리케이션 개발자를 위한, Rust로 따라가는 CPU·GPU 교과서',
       head: [
         {
           tag: 'meta',
@@ -36,41 +36,41 @@ export default defineConfig({
       ],
       defaultLocale: 'root',
       locales: {
-        root: { label: '日本語', lang: 'ja' },
+        root: { label: '한국어', lang: 'ko' },
       },
       customCss: ['./src/styles/custom.css'],
       tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 3 },
       sidebar: [
-        { label: 'はじめに', link: '/' },
+        { label: '들어가며', link: '/' },
         {
-          label: 'Part I — CPUを知る',
+          label: 'Part I — CPU 이해하기',
           items: [{ autogenerate: { directory: 'cpu' } }],
         },
         {
-          label: 'Part II — Rustと最適化',
+          label: 'Part II — Rust와 최적화',
           items: [{ autogenerate: { directory: 'rust-opt' } }],
         },
         {
-          label: 'Part III — GPUを知る',
+          label: 'Part III — GPU 이해하기',
           items: [{ autogenerate: { directory: 'gpu' } }],
         },
         {
-          label: 'Part IV — CPUとメモリの深層',
+          label: 'Part IV — CPU와 메모리의 심층',
           items: [{ autogenerate: { directory: 'cpu-deep' } }],
         },
         {
-          label: 'Part V — Rustの深層',
+          label: 'Part V — Rust의 심층',
           items: [{ autogenerate: { directory: 'rust-deep' } }],
         },
         {
-          label: 'Part VI — GPUの深層',
+          label: 'Part VI — GPU의 심층',
           items: [{ autogenerate: { directory: 'gpu-deep' } }],
         },
         {
-          label: 'Part VII — システムと実践',
+          label: 'Part VII — 시스템과 실전',
           items: [{ autogenerate: { directory: 'systems' } }],
         },
-        { label: '付録', items: [{ autogenerate: { directory: 'appendix' } }] },
+        { label: '부록', items: [{ autogenerate: { directory: 'appendix' } }] },
       ],
     }),
   ],
