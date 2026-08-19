@@ -6,7 +6,7 @@ fn main() {
     let ints: Vec<i32> = (0..n).map(|i| (i % 100) as i32).collect();
     let floats: Vec<f32> = (0..n).map(|i| (i % 100) as f32).collect();
 
-    // i32 の合計
+    // i32 합계
     let start = Instant::now();
     let mut sum = 0i64;
     for _ in 0..passes {
@@ -16,9 +16,9 @@ fn main() {
         }
         sum += s as i64;
     }
-    println!("i32 の合計: {:>9.3?} (sum={sum})", start.elapsed());
+    println!("i32 합계: {:>9.3?} (sum={sum})", start.elapsed());
 
-    // f32 の合計(まったく同じ書き方)
+    // f32 합계(완전히 같은 작성 방식)
     let start = Instant::now();
     let mut sum = 0.0f64;
     for _ in 0..passes {
@@ -28,5 +28,5 @@ fn main() {
         }
         sum += s as f64;
     }
-    println!("f32 の合計: {:>9.3?} (sum={sum:.0})", start.elapsed());
+    println!("f32 합계: {:>9.3?} (sum={sum:.0})", start.elapsed());
 }
