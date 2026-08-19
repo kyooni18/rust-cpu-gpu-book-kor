@@ -7,7 +7,7 @@ fn xorshift(state: &mut u64) -> u64 {
     *state
 }
 
-// 中身のほぼ同じ関数を16個用意する
+// 내부 동작이 거의 같은 함수 16개를 준비합니다
 macro_rules! ops {
     ($($name:ident, $k:expr;)*) => {
         $(#[inline(never)] fn $name(x: u64) -> u64 { x.wrapping_mul(2).wrapping_add($k) })*
@@ -20,11 +20,11 @@ fn main() {
     let n = 20_000_000;
     let mut state = 0x2545_F491_4F6C_DD1D_u64;
 
-    // 呼び出し先の並び: 規則的(順繰り) vs ランダム
+    // 호출 대상 순서: 규칙적(순환) vs 무작위
     let regular: Vec<u8> = (0..n).map(|i| (i % 16) as u8).collect();
     let random: Vec<u8> = (0..n).map(|_| (xorshift(&mut state) % 16) as u8).collect();
 
-    for (name, idx) in [("規則的 ", &regular), ("ランダム", &random)] {
+    for (name, idx) in [("규칙적", &regular), ("무작위", &random)] {
         let start = Instant::now();
         let mut x = 0u64;
         for &i in idx.iter() {
