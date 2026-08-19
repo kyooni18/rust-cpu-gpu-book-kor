@@ -1,7 +1,7 @@
 use rayon::prelude::*;
 use std::time::Instant;
 
-// コラッツ数列: n が 1 になるまでの手数を数える(1要素あたりの仕事が重い例)
+// 콜라츠 수열: n이 1이 될 때까지의 단계 수를 셉니다(원소 하나당 작업이 무거운 예)
 fn collatz_steps(mut n: u64) -> u64 {
     let mut steps = 0;
     while n != 1 {
@@ -14,16 +14,16 @@ fn collatz_steps(mut n: u64) -> u64 {
 fn main() {
     let range = 1u64..2_000_000;
 
-    // rayonのスレッドプールは初回利用時に作られるため、
-    // 計測前に一度動かして準備しておく(ウォームアップ)
+    // Rayon 스레드 풀은 처음 사용할 때 만들어지므로
+    // 측정 전에 한 번 실행해 준비합니다(워밍업)
     rayon::join(|| (), || ());
 
     let start = Instant::now();
     let total: u64 = range.clone().map(collatz_steps).sum();
-    println!("逐次: {:>9.3?} (total={total})", start.elapsed());
+    println!("순차: {:>9.3?} (total={total})", start.elapsed());
 
-    // 変更点は into_par_iter() だけ
+    // 바뀐 부분은 into_par_iter()뿐입니다
     let start = Instant::now();
     let total: u64 = range.into_par_iter().map(collatz_steps).sum();
-    println!("並列: {:>9.3?} (total={total})", start.elapsed());
+    println!("병렬: {:>9.3?} (total={total})", start.elapsed());
 }
