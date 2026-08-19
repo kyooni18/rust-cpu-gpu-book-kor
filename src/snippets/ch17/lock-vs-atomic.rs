@@ -17,7 +17,7 @@ fn main() {
             });
         }
     });
-    println!("AtomicU64 : {:>9.3?} (計 {})", start.elapsed(), counter.load(Ordering::Relaxed));
+    println!("AtomicU64 : {:>9.3?} (합계 {})", start.elapsed(), counter.load(Ordering::Relaxed));
 
     let counter = Mutex::new(0u64);
     let start = Instant::now();
@@ -30,5 +30,5 @@ fn main() {
             });
         }
     });
-    println!("Mutex<u64>: {:>9.3?} (計 {})", start.elapsed(), *counter.lock().unwrap());
+    println!("Mutex<u64>: {:>9.3?} (합계 {})", start.elapsed(), *counter.lock().unwrap());
 }
