@@ -8,7 +8,7 @@ fn main() {
     let passes = 20;
     let floats: Vec<f32> = (0..n).map(|i| (i % 100) as f32).collect();
 
-    // スカラ: 1個ずつ足す
+    // 스칼라: 한 번에 하나씩 더합니다
     let start = Instant::now();
     let mut total = 0.0f64;
     for _ in 0..passes {
@@ -18,9 +18,9 @@ fn main() {
         }
         total += s as f64;
     }
-    println!("スカラ: {:>9.3?} (sum={total:.0})", start.elapsed());
+    println!("스칼라: {:>9.3?} (sum={total:.0})", start.elapsed());
 
-    // SIMD: 8レーンで足し、最後にレーンをまとめる
+    // SIMD: 8개 레인으로 더한 뒤 마지막에 레인 값을 합칩니다
     let start = Instant::now();
     let mut total = 0.0f64;
     for _ in 0..passes {
