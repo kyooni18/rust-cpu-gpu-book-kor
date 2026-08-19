@@ -1,12 +1,12 @@
 use std::time::Instant;
 
 fn main() {
-    // 100万要素 = 8MB。キャッシュにほぼ収まる大きさにして、メモリ待ちの影響を除く
+    // 100만 원소 = 8MB. 캐시에 대부분 들어가도록 해 메모리 대기 영향을 줄입니다
     let n = 1_000_000;
     let data: Vec<f64> = (0..n).map(|i| (i % 100) as f64 * 0.01).collect();
     let passes = 20;
 
-    // 1本のアキュムレータ: 前の加算が終わるまで次の加算を始められない
+    // 누산기 1개: 이전 덧셈이 끝나야 다음 덧셈을 시작할 수 있습니다
     let start = Instant::now();
     let mut sum = 0.0f64;
     for _ in 0..passes {
@@ -14,9 +14,9 @@ fn main() {
             sum += v;
         }
     }
-    println!("アキュムレータ1本: {:>9.3?} (sum={sum:.0})", start.elapsed());
+    println!("누산기 1개: {:>9.3?} (sum={sum:.0})", start.elapsed());
 
-    // 4本のアキュムレータ: 依存しない4つの加算の連鎖が並行して進む
+    // 누산기 4개: 서로 의존하지 않는 네 개의 덧셈 체인이 병렬로 진행될 수 있습니다
     let start = Instant::now();
     let mut sum = 0.0f64;
     for _ in 0..passes {
@@ -30,5 +30,5 @@ fn main() {
         }
         sum += s.iter().sum::<f64>() + chunks.remainder().iter().sum::<f64>();
     }
-    println!("アキュムレータ4本: {:>9.3?} (sum={sum:.0})", start.elapsed());
+    println!("누산기 4개: {:>9.3?} (sum={sum:.0})", start.elapsed());
 }
