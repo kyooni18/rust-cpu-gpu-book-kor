@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Rust Playground でスニペットを実行する。
-# 使い方: scripts/play.sh <file.rs> [mode=release] [channel=stable]
+# Rust Playground에서 스니펫을 실행합니다.
+# 사용법: scripts/play.sh <file.rs> [mode=release] [channel=stable]
 set -euo pipefail
 
 file="$1"
