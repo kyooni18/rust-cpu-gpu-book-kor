@@ -20,7 +20,7 @@ fn main() {
     }
     let t = start.elapsed();
     println!(
-        "通常の関数呼び出し: {t:>9.3?} ({:5.1}ns/回, acc={acc})",
+        "일반 함수 호출      : {t:>9.3?} ({:5.1}ns/회, acc={acc})",
         t.as_nanos() as f64 / n as f64
     );
 
@@ -31,7 +31,7 @@ fn main() {
     }
     let t = start.elapsed();
     println!(
-        "getpidシステムコール: {t:>7.3?} ({:5.1}ns/回, acc={acc})",
+        "getpid 시스템 콜   : {t:>7.3?} ({:5.1}ns/회, acc={acc})",
         t.as_nanos() as f64 / n as f64
     );
 }
