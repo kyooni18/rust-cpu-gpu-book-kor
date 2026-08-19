@@ -16,18 +16,18 @@ fn main() {
     let mut sorted = unsorted.clone();
     sorted.sort_unstable();
 
-    // (1) if を算術に置き換える: 条件を 0/1 の数値にして掛ける
-    for (name, data) in [("未ソート", &unsorted), ("ソート済", &sorted)] {
+    // (1) if를 산술 연산으로 바꿉니다: 조건을 0/1 값으로 변환해 곱합니다
+    for (name, data) in [("정렬 안 됨", &unsorted), ("정렬됨", &sorted)] {
         let start = Instant::now();
         let mut sum = 0u64;
         for &v in data.iter() {
             sum += u64::from(v >= 128) * v as u64;
         }
-        println!("算術   {name}: {:>9.3?} (sum={sum})", start.elapsed());
+        println!("산술   {name}: {:>9.3?} (sum={sum})", start.elapsed());
     }
 
-    // (2) イテレータで書く
-    for (name, data) in [("未ソート", &unsorted), ("ソート済", &sorted)] {
+    // (2) 이터레이터로 작성합니다
+    for (name, data) in [("정렬 안 됨", &unsorted), ("정렬됨", &sorted)] {
         let start = Instant::now();
         let sum: u64 = data
             .iter()
