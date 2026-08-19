@@ -1,12 +1,12 @@
-//! 24章: チャンク処理の「同期の形」を変えて全体時間を比べる。
-//! 実行: cd examples && cargo run --release -p ch24-overlap
+//! 24장: 청크 처리에서 동기화 방식을 바꿔 전체 시간을 비교합니다.
+//! 실행: cd examples && cargo run --release -p ch24-overlap
 
 use std::num::NonZeroU64;
 use std::time::Instant;
 use wgpu::util::DeviceExt;
 
 const CHUNKS: usize = 16;
-const CHUNK_ELEMS: usize = 1024 * 1024; // 1チャンク = 4MB
+const CHUNK_ELEMS: usize = 1024 * 1024; // 청크 하나 = 4MB
 
 struct Chunk {
     buf_in: wgpu::Buffer,
@@ -19,7 +19,7 @@ fn main() {
     let instance = wgpu::Instance::new(wgpu::InstanceDescriptor::new_without_display_handle());
     let adapter =
         pollster::block_on(instance.request_adapter(&wgpu::RequestAdapterOptions::default()))
-            .expect("GPUが見つかりません");
+            .expect("GPU를 찾을 수 없습니다");
     println!("GPU: {}", adapter.get_info().name);
     let (device, queue) = pollster::block_on(adapter.request_device(&wgpu::DeviceDescriptor {
         label: None,
@@ -29,7 +29,7 @@ fn main() {
         memory_hints: wgpu::MemoryHints::MemoryUsage,
         trace: wgpu::Trace::Off,
     }))
-    .expect("デバイスの作成に失敗");
+    .expect("Device 생성에 실패했습니다");
 
     let module = device.create_shader_module(wgpu::include_wgsl!("work.wgsl"));
     let storage = |binding: u32, read_only: bool| wgpu::BindGroupLayoutEntry {
@@ -60,7 +60,7 @@ fn main() {
         cache: None,
     });
 
-    // チャンクごとのバッファ一式(入力・出力・読み戻し)
+    // 청크마다 입력·출력·읽기 버퍼 한 세트를 준비합니다
     let bytes = (CHUNK_ELEMS * 4) as u64;
     let chunks: Vec<Chunk> = (0..CHUNKS)
         .map(|c| {
@@ -116,37 +116,37 @@ fn main() {
         sum
     };
 
-    // ウォームアップ(シェーダコンパイル等)
+    // 셰이더 컴파일 같은 초기 비용을 워밍업으로 제거합니다
     queue.submit([record(&chunks[0])]);
     device.poll(wgpu::PollType::wait_indefinitely()).unwrap();
 
-    // ---- (A) チャンクごとに完全同期 ----
+    // ---- (A) 청크마다 완전히 동기화합니다 ----
     let start = Instant::now();
     let mut sum_a = 0u64;
     for c in &chunks {
         queue.submit([record(c)]);
         let slice = c.buf_read.slice(..);
-        slice.map_async(wgpu::MapMode::Read, |r| r.expect("map失敗"));
-        device.poll(wgpu::PollType::wait_indefinitely()).unwrap(); // 毎回GPUを待つ
+        slice.map_async(wgpu::MapMode::Read, |r| r.expect("매핑에 실패했습니다"));
+        device.poll(wgpu::PollType::wait_indefinitely()).unwrap(); // 매번 GPU를 기다립니다
         sum_a = sum_a.wrapping_add(checksum(c));
     }
-    println!("(A) 1チャンクごとに同期  : {:>9.3?}", start.elapsed());
+    println!("(A) 청크마다 동기화      : {:>9.3?}", start.elapsed());
 
-    // ---- (B) 全部投入してから一括で回収 ----
+    // ---- (B) 모두 제출한 뒤 한꺼번에 회수합니다 ----
     let start = Instant::now();
     for c in &chunks {
-        queue.submit([record(c)]); // 待たずに次を投入
+        queue.submit([record(c)]); // 기다리지 않고 다음 작업을 제출합니다
     }
     for c in &chunks {
-        c.buf_read.slice(..).map_async(wgpu::MapMode::Read, |r| r.expect("map失敗"));
+        c.buf_read.slice(..).map_async(wgpu::MapMode::Read, |r| r.expect("매핑에 실패했습니다"));
     }
-    device.poll(wgpu::PollType::wait_indefinitely()).unwrap(); // 待つのは1回
+    device.poll(wgpu::PollType::wait_indefinitely()).unwrap(); // 대기는 한 번만 합니다
     let mut sum_b = 0u64;
     for c in &chunks {
         sum_b = sum_b.wrapping_add(checksum(c));
     }
-    println!("(B) 全投入→一括回収      : {:>9.3?}", start.elapsed());
+    println!("(B) 모두 제출→일괄 회수: {:>9.3?}", start.elapsed());
 
     assert_eq!(sum_a, sum_b);
-    println!("検証: OK (checksum={sum_a})");
+    println!("검증: OK (checksum={sum_a})");
 }
