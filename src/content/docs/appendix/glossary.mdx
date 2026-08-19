@@ -1,367 +1,220 @@
 ---
-title: 用語集
-description: 本書で登場した専門用語の定義集。カテゴリ別に、初出の章へのリンク付きでまとめる。
+title: 용어집
+description: 이 책에 등장하는 전문 용어를 분야별로 정리하고 처음 등장한 장으로 연결합니다.
 sidebar:
-  label: 用語集
+  label: 용어집
 ---
 
-本書で定義した専門用語を分野別にまとめました。
-括弧内は英語表記、末尾のリンクは初出の章です。
+이 책에서 정의한 주요 전문 용어를 분야별로 정리했습니다.
+괄호 안은 영어 표기이며, 각 항목 끝의 링크는 처음 소개한 장입니다.
 
-## 計算の基本
+## 계산의 기본
 
-- **CPU**(central processing unit) — メモリ上の命令を順に読み取り
-  実行する、コンピュータの中心装置。[1章](/cpu/01-how-code-runs/)
-- **メモリ**(memory) — 命令とデータを置く記憶装置。本書では主に
-  メインメモリ(DRAM)を指す。[1章](/cpu/01-how-code-runs/)
-- **命令**(instruction) — 「足す」「読む」など、CPUが実行する
-  最小単位の操作指示。[1章](/cpu/01-how-code-runs/)
-- **機械語**(machine code) — 命令を0と1の並びで表した、
-  CPUが直接実行する形式。[1章](/cpu/01-how-code-runs/)
-- **アセンブリ**(assembly) — 機械語の命令を人間が読める記法で
-  1対1に書き直した表現。[1章](/cpu/01-how-code-runs/)
-- **命令セット**(instruction set architecture、ISA) — CPUが受け付ける
-  命令の種類と形式の取り決め。x86-64、ARM64など。[1章](/cpu/01-how-code-runs/)
-- **オペランド**(operand) — 命令が操作する対象。レジスタ、定数、
-  メモリ上の位置など。`add w0, w1, w0`ならw1とw0が入力、
-  先頭のw0が書き込み先のオペランド。[1章](/cpu/01-how-code-runs/)
-- **レジスタ**(register) — CPU内部にある少数・最速の記憶場所。
-  計算は原則レジスタ上で行われる。[1章](/cpu/01-how-code-runs/)
-- **レジスタ割り付け**(register allocation) — どの変数をどのレジスタに
-  載せるかを決めるコンパイラの処理。[1章](/cpu/01-how-code-runs/)
-- **フェッチ**(fetch)/**デコード**(decode)/**実行**(execute) —
-  命令処理の3段階。メモリから読み、解釈し、実行する。[1章](/cpu/01-how-code-runs/)
-- **クロック周波数**(clock frequency) — CPUが動作の拍を刻む速さ。
-  3GHzなら毎秒30億サイクル。[1章](/cpu/01-how-code-runs/)
-- **呼び出し規約**(calling convention) — 関数の引数と戻り値を
-  どのレジスタで受け渡すかの取り決め。OSとISAごとに決まっている。[1章](/cpu/01-how-code-runs/)
-- **debugビルド/releaseビルド** — 最適化なし(検査あり)/最適化ありの
-  コンパイル設定。性能の話はreleaseビルドが前提。[1章](/cpu/01-how-code-runs/)
+- **CPU**(central processing unit) — 메모리에 있는 명령어를 읽고 실행하는 컴퓨터의 중심 처리 장치입니다. [1장](/cpu/01-how-code-runs/)
+- **메모리**(memory) — 명령어와 데이터를 저장하는 장치입니다. 이 책에서는 주로 메인 메모리인 DRAM을 뜻합니다. [1장](/cpu/01-how-code-runs/)
+- **명령어**(instruction) — 덧셈, 읽기처럼 CPU가 실행하는 최소 단위의 작업 지시입니다. [1장](/cpu/01-how-code-runs/)
+- **기계어**(machine code) — CPU가 직접 실행할 수 있도록 명령어를 비트열로 표현한 형식입니다. [1장](/cpu/01-how-code-runs/)
+- **어셈블리**(assembly) — 기계어 명령어를 사람이 읽을 수 있는 기호로 표현한 표기입니다. [1장](/cpu/01-how-code-runs/)
+- **명령어 집합 아키텍처**(instruction set architecture, ISA) — CPU가 지원하는 명령어 종류와 형식을 정의한 규약입니다. x86-64, ARM64 등이 있습니다. [1장](/cpu/01-how-code-runs/)
+- **피연산자**(operand) — 명령어가 읽거나 쓰는 대상입니다. 레지스터, 상수, 메모리 위치 등이 포함됩니다. [1장](/cpu/01-how-code-runs/)
+- **레지스터**(register) — CPU 내부의 매우 작고 빠른 저장 공간입니다. 대부분의 연산은 레지스터를 중심으로 수행됩니다. [1장](/cpu/01-how-code-runs/)
+- **레지스터 할당**(register allocation) — 프로그램의 변수를 실제 CPU 레지스터에 배치하는 컴파일러 작업입니다. [1장](/cpu/01-how-code-runs/)
+- **페치**(fetch) / **디코드**(decode) / **실행**(execute) — 명령어를 가져오고, 해석하고, 실제 연산을 수행하는 처리 단계입니다. [1장](/cpu/01-how-code-runs/)
+- **클록 주파수**(clock frequency) — CPU 동작 주기의 빈도입니다. 3GHz는 초당 약 30억 사이클을 뜻합니다. [1장](/cpu/01-how-code-runs/)
+- **호출 규약**(calling convention) — 함수의 인자와 반환값을 어떤 레지스터와 스택 위치로 전달할지 정의한 규칙입니다. [1장](/cpu/01-how-code-runs/)
+- **debug 빌드 / release 빌드** — 최적화를 거의 하지 않고 검사를 많이 수행하는 개발 빌드와, 최적화를 적용하는 배포 빌드입니다. 성능 비교는 보통 release 빌드를 기준으로 합니다. [1장](/cpu/01-how-code-runs/)
 
-## メモリとキャッシュ
+## 메모리와 캐시
 
-- **レイテンシ**(latency) — 要求してから最初の結果が届くまでの時間。[2章](/cpu/02-memory-hierarchy/)
-- **帯域幅**(bandwidth) — 単位時間あたりに転送できるデータ量。[2章](/cpu/02-memory-hierarchy/)
-- **DRAM**(dynamic RAM) — メインメモリに使われる大容量・低速のメモリ。
-  レイテンシは約100ナノ秒。[2章](/cpu/02-memory-hierarchy/)
-- **SRAM**(static RAM) — キャッシュに使われる高速・高価なメモリ。[2章](/cpu/02-memory-hierarchy/)
-- **キャッシュ**(cache) — 最近使ったデータの写しを置く小容量・高速の
-  メモリ。CPUに近い順にL1/L2/L3がある。[2章](/cpu/02-memory-hierarchy/)
-- **キャッシュヒット**(cache hit)/**キャッシュミス**(cache miss) —
-  目的のデータがキャッシュにある/ない状態。[2章](/cpu/02-memory-hierarchy/)
-- **キャッシュライン**(cache line) — キャッシュとメモリの転送単位。
-  x86-64では64バイトが標準的(Apple Silicon等では128バイト)。[2章](/cpu/02-memory-hierarchy/)
-- **プリフェッチ**(prefetch) — アクセスの規則性を検出し、要求前に
-  データを先読みするハードウェアの仕組み。[2章](/cpu/02-memory-hierarchy/)
-- **空間的局所性**(spatial locality) — 使ったデータの近くを続けて
-  使う性質。キャッシュラインを活かす条件。[2章](/cpu/02-memory-hierarchy/)
-- **時間的局所性**(temporal locality) — 同じデータを短い間隔で
-  繰り返し使う性質。[2章](/cpu/02-memory-hierarchy/)
-- **ポインタチェイシング**(pointer chasing) — 読んだ値が次に読む場所を
-  決めるアクセス列。プリフェッチ不能でレイテンシが直列に積み上がる。[2章](/cpu/02-memory-hierarchy/)
-- **アラインメント**(alignment) — 型ごとに決まる「置いてよいアドレスの
-  単位」。[2章](/cpu/02-memory-hierarchy/)
-- **パディング**(padding) — アラインメントを守るために挿入される
-  隙間のバイト。[2章](/cpu/02-memory-hierarchy/)
-- **AoS**(array of structs)/**SoA**(struct of arrays) — 構造体の配列/
-  フィールドごとの配列。SoAは走査とSIMD・GPUに有利。[2章](/cpu/02-memory-hierarchy/)
-- **ヒープ確保**(heap allocation) — 実行時にメモリ領域を動的に
-  確保すること。`Vec`の伸長などで発生し、性能上の主要コストになりやすい。[7章](/rust-opt/07-zero-cost/)
+- **지연 시간**(latency) — 요청을 보낸 뒤 첫 결과를 받을 때까지 걸리는 시간입니다. [2장](/cpu/02-memory-hierarchy/)
+- **대역폭**(bandwidth) — 단위 시간에 전송할 수 있는 데이터 양입니다. [2장](/cpu/02-memory-hierarchy/)
+- **DRAM**(dynamic RAM) — 메인 메모리에 주로 사용하는 대용량 메모리입니다. 캐시보다 느리며 접근 지연은 대략 수십~100나노초 수준입니다. [2장](/cpu/02-memory-hierarchy/)
+- **SRAM**(static RAM) — CPU 캐시 등에 사용하는 빠르고 비싼 메모리입니다. [2장](/cpu/02-memory-hierarchy/)
+- **캐시**(cache) — 최근 또는 곧 사용할 가능성이 높은 데이터를 저장하는 작고 빠른 메모리입니다. 보통 L1/L2/L3 계층으로 구성됩니다. [2장](/cpu/02-memory-hierarchy/)
+- **캐시 히트**(cache hit) / **캐시 미스**(cache miss) — 필요한 데이터가 캐시에 존재하는 경우와 존재하지 않는 경우입니다. [2장](/cpu/02-memory-hierarchy/)
+- **캐시 라인**(cache line) — 캐시와 다음 메모리 계층 사이에서 데이터를 옮기는 기본 단위입니다. x86-64에서는 64바이트가 흔하고 Apple Silicon에서는 128바이트인 경우가 있습니다. [2장](/cpu/02-memory-hierarchy/)
+- **프리페치**(prefetch) — 반복적인 접근 패턴을 보고 CPU가 요청 전에 데이터를 미리 읽어오는 기능입니다. [2장](/cpu/02-memory-hierarchy/)
+- **공간 지역성**(spatial locality) — 방금 사용한 데이터 주변의 데이터를 곧 다시 사용할 가능성이 높은 성질입니다. [2장](/cpu/02-memory-hierarchy/)
+- **시간 지역성**(temporal locality) — 같은 데이터를 짧은 시간 안에 반복해서 사용하는 성질입니다. [2장](/cpu/02-memory-hierarchy/)
+- **포인터 체이싱**(pointer chasing) — 현재 읽은 값이 다음에 접근할 주소를 결정하는 접근 패턴입니다. 접근이 직렬화되기 쉬워 메모리 지연의 영향을 크게 받습니다. [2장](/cpu/02-memory-hierarchy/)
+- **정렬**(alignment) — 타입이 메모리에 배치될 때 만족해야 하는 주소 단위입니다. [2장](/cpu/02-memory-hierarchy/)
+- **패딩**(padding) — 정렬 조건을 맞추기 위해 구조체 등에 삽입되는 사용하지 않는 바이트입니다. [2장](/cpu/02-memory-hierarchy/)
+- **AoS**(array of structs) / **SoA**(struct of arrays) — 구조체 배열과 필드별 배열 배치 방식입니다. SoA는 특정 필드만 연속으로 읽을 때 SIMD와 GPU에 유리할 수 있습니다. [2장](/cpu/02-memory-hierarchy/)
+- **힙 할당**(heap allocation) — 실행 중에 동적으로 메모리 공간을 확보하는 작업입니다. `Vec` 성장이나 `Box` 생성 등에서 발생합니다. [7장](/rust-opt/07-zero-cost/)
 
-## CPUの実行の仕組み
+## CPU의 실행 구조
 
-- **パイプライン**(pipeline) — 命令の処理段階を重ねて流れ作業にする
-  仕組み。[3章](/cpu/03-pipeline/)
-- **ハザード**(hazard) — パイプラインの進行を妨げる要因。データ依存に
-  よるものと分岐によるものがある。[3章](/cpu/03-pipeline/)
-- **ストール**(stall) — ハザードによってパイプラインが待ちに入ること。[3章](/cpu/03-pipeline/)
-- **分岐**(branch) — `if`やループの実体である条件付きジャンプ命令。[3章](/cpu/03-pipeline/)
-- **分岐予測器**(branch predictor) — 分岐の行き先を履歴から予測する
-  ハードウェア。[3章](/cpu/03-pipeline/)
-- **投機実行**(speculative execution) — 予測に基づき、確定前に命令を
-  実行してしまう方式。外れたら捨てる。[3章](/cpu/03-pipeline/)
-- **ブランチレス**(branchless) — 分岐を算術や条件付き移動に置き換えた
-  コード。予測不能な分岐のコストを避ける。[3章](/cpu/03-pipeline/)
-- **条件付き移動**(conditional move) — 条件に応じて値を選ぶ、
-  分岐しない命令。[3章](/cpu/03-pipeline/)
-- **if変換**(if-conversion) — コンパイラが分岐を条件付き移動などの
-  計算に置き換える最適化。[3章](/cpu/03-pipeline/)
-- **スーパースカラ**(superscalar) — 1サイクルに複数の命令を発行・実行
-  する方式。[3章](/cpu/03-pipeline/)
-- **アウトオブオーダー実行**(out-of-order execution) — 記述順でなく
-  依存が解決した順に命令を実行する方式。[3章](/cpu/03-pipeline/)
-- **命令レベル並列性**(instruction-level parallelism、ILP) — 命令列に
-  含まれる「同時に実行できる度合い」。[3章](/cpu/03-pipeline/)
-- **IPC**(instructions per cycle) — 1サイクルあたりの実行命令数。[3章](/cpu/03-pipeline/)
+- **파이프라인**(pipeline) — 명령어 처리 단계를 겹쳐 여러 명령어를 동시에 진행시키는 구조입니다. [3장](/cpu/03-pipeline/)
+- **해저드**(hazard) — 데이터 의존성이나 분기처럼 파이프라인 진행을 방해하는 요인입니다. [3장](/cpu/03-pipeline/)
+- **스톨**(stall) — 해저드나 자원 부족 때문에 파이프라인 진행이 일시적으로 멈추는 현상입니다. [3장](/cpu/03-pipeline/)
+- **분기**(branch) — `if`나 루프처럼 다음 실행 위치를 조건에 따라 바꾸는 명령입니다. [3장](/cpu/03-pipeline/)
+- **분기 예측기**(branch predictor) — 분기 결과를 과거 패턴으로 예측하는 하드웨어입니다. [3장](/cpu/03-pipeline/)
+- **추측 실행**(speculative execution) — 예측 결과를 바탕으로 결과가 확정되기 전에 명령어를 실행하는 방식입니다. 예측이 틀리면 작업을 버립니다. [3장](/cpu/03-pipeline/)
+- **브랜치리스**(branchless) — 분기를 산술 연산이나 조건부 선택으로 바꿔 예측 실패를 피하는 코드 형태입니다. [3장](/cpu/03-pipeline/)
+- **조건부 이동**(conditional move) — 분기 없이 조건에 따라 값을 선택하는 명령어입니다. [3장](/cpu/03-pipeline/)
+- **if 변환**(if-conversion) — 컴파일러가 분기를 조건부 이동이나 마스크 연산으로 바꾸는 최적화입니다. [3장](/cpu/03-pipeline/)
+- **슈퍼스칼라**(superscalar) — 한 사이클에 여러 명령어를 발행하고 실행하는 CPU 구조입니다. [3장](/cpu/03-pipeline/)
+- **비순차 실행**(out-of-order execution) — 프로그램에 적힌 순서가 아니라 입력 의존성이 준비된 순서대로 명령어를 실행하는 방식입니다. [3장](/cpu/03-pipeline/)
+- **명령어 수준 병렬성**(instruction-level parallelism, ILP) — 명령어들 사이에서 동시에 실행할 수 있는 정도입니다. [3장](/cpu/03-pipeline/)
+- **IPC**(instructions per cycle) — 한 사이클에 완료하거나 실행한 명령어 수를 나타내는 지표입니다. [3장](/cpu/03-pipeline/)
 
 ## SIMD
 
-- **SIMD**(single instruction, multiple data) — 1命令で複数のデータを
-  同時に計算する方式。[4章](/cpu/04-simd/)
-- **ベクトルレジスタ**(vector register) — SIMD用の幅広レジスタ。
-  SSE2は128ビット、AVX2は256ビット。[4章](/cpu/04-simd/)
-- **SSE2/AVX/AVX-512/NEON** — SIMD命令の拡張の系統。SSE2はx86-64全CPU、
-  NEONはARM64全CPUが対応し、AVX系は対応CPU限定。[4章](/cpu/04-simd/)
-- **レーン**(lane) — ベクトルレジスタ内の1区画。[4章](/cpu/04-simd/)
-- **portable SIMD**(`std::simd`) — CPUの種類によらず書ける
-  RustのSIMD API(2026年時点でnightly)。[4章](/cpu/04-simd/)
-- **自動ベクトル化**(auto-vectorization) — コンパイラがループをSIMD命令に
-  変換する最適化。[4章](/cpu/04-simd/)
-- **イントリンシック**(intrinsic) — CPU命令に直結した関数(`std::arch`)。[4章](/cpu/04-simd/)
-- **実行時機能検出**(runtime feature detection) — 実行中のCPUが持つ
-  命令拡張を実行時に調べること。[4章](/cpu/04-simd/)
+- **SIMD**(single instruction, multiple data) — 하나의 명령어로 여러 데이터 원소를 동시에 연산하는 방식입니다. [4장](/cpu/04-simd/)
+- **벡터 레지스터**(vector register) — SIMD용으로 여러 원소를 담는 넓은 레지스터입니다. SSE2는 128비트, AVX2는 256비트입니다. [4장](/cpu/04-simd/)
+- **SSE2 / AVX / AVX-512 / NEON** — CPU 아키텍처별 SIMD 명령어 확장입니다. [4장](/cpu/04-simd/)
+- **레인**(lane) — 벡터 레지스터 안에서 개별 데이터 원소가 차지하는 구역입니다. [4장](/cpu/04-simd/)
+- **portable SIMD**(`std::simd`) — CPU별 명령어 차이를 추상화하는 Rust SIMD API입니다. 2026년 기준 nightly 기능입니다. [4장](/cpu/04-simd/)
+- **자동 벡터화**(auto-vectorization) — 컴파일러가 스칼라 루프를 SIMD 명령어를 사용하는 코드로 변환하는 최적화입니다. [4장](/cpu/04-simd/)
+- **인트린식**(intrinsic) — 특정 CPU 명령어와 가깝게 연결된 함수입니다. Rust에서는 `std::arch`가 대표적입니다. [4장](/cpu/04-simd/)
+- **실행 시 기능 검출**(runtime feature detection) — 현재 CPU가 어떤 SIMD 확장을 지원하는지 실행 중에 확인하는 방식입니다. [4장](/cpu/04-simd/)
 
-## 並列とマルチコア
+## 병렬성과 멀티코어
 
-- **コア**(core) — CPU内の独立した実行装置。[5章](/cpu/05-multicore/)
-- **SMT**(simultaneous multithreading) — 1コアに複数の命令の流れを
-  混在させる技術。Hyper-Threadingなど。[5章](/cpu/05-multicore/)
-- **スレッド**(thread) — OSが管理する命令の流れの単位。[5章](/cpu/05-multicore/)
-- **並行**(concurrency)/**並列**(parallelism) — 複数の仕事を交互に
-  進める構造/文字どおり同時に実行すること。[5章](/cpu/05-multicore/)
-- **キャッシュコヒーレンス**(cache coherence) — コアごとのキャッシュ間で
-  データの一貫性を保つ仕組み。書き込みはラインの所有権の奪い合いになる。[5章](/cpu/05-multicore/)
-- **false sharing**(偽共有) — 別々の変数が同じキャッシュラインに載り、
-  無関係な書き込み同士が競合する現象。[5章](/cpu/05-multicore/)
-- **データ競合**(data race) — 同期なしの並行アクセスで少なくとも一方が
-  書き込みである状態。Rustはコンパイル時に排除する。[5章](/cpu/05-multicore/)
-- **アトミック操作**(atomic operation) — 途中に割り込まれない読み書き。[5章](/cpu/05-multicore/)
-- **メモリオーダリング**(memory ordering) — アトミック操作の前後で、
-  他の読み書きの順序をどこまで保証するかの指定。[5章](/cpu/05-multicore/)
-- **データ並列**(data parallelism) — 大量の要素それぞれに独立な計算を
-  する形の並列性。[5章](/cpu/05-multicore/)
-- **ワークスティーリング**(work stealing) — 手の空いたスレッドが
-  他のスレッドの未処理分を引き取って負荷を均す方式。rayonが採用。[5章](/cpu/05-multicore/)
-- **Amdahlの法則**(Amdahl's law) — 並列化できない部分が全体の高速化の
-  上限を決めるという法則。[5章](/cpu/05-multicore/)
+- **코어**(core) — CPU 안의 독립적인 실행 단위입니다. [5장](/cpu/05-multicore/)
+- **SMT**(simultaneous multithreading) — 한 물리 코어가 여러 하드웨어 스레드의 명령어를 섞어 실행하는 기술입니다. Hyper-Threading이 대표적입니다. [5장](/cpu/05-multicore/)
+- **스레드**(thread) — OS가 스케줄링하는 실행 흐름의 단위입니다. [5장](/cpu/05-multicore/)
+- **동시성**(concurrency) / **병렬성**(parallelism) — 여러 작업이 진행 중인 구조와, 실제로 동시에 실행되는 상태를 구분하는 용어입니다. [5장](/cpu/05-multicore/)
+- **캐시 일관성**(cache coherence) — 여러 CPU 코어의 캐시에 있는 동일 데이터가 일관된 값을 보이도록 유지하는 하드웨어 메커니즘입니다. [5장](/cpu/05-multicore/)
+- **거짓 공유**(false sharing) — 서로 다른 변수가 같은 캐시 라인에 있어 독립적인 쓰기 작업이 불필요하게 충돌하는 현상입니다. [5장](/cpu/05-multicore/)
+- **데이터 레이스**(data race) — 동기화되지 않은 동시 메모리 접근 중 적어도 하나가 쓰기인 상황입니다. 안전한 Rust는 이를 타입 체계로 방지합니다. [5장](/cpu/05-multicore/)
+- **원자적 연산**(atomic operation) — 다른 스레드가 중간 상태를 관찰하지 못하도록 하나의 단위처럼 수행되는 연산입니다. [5장](/cpu/05-multicore/)
+- **메모리 오더링**(memory ordering) — 원자적 연산 전후의 다른 메모리 접근 순서를 어디까지 보장할지 지정하는 규칙입니다. [5장](/cpu/05-multicore/)
+- **데이터 병렬성**(data parallelism) — 많은 데이터 원소 각각에 독립적인 계산을 적용하는 병렬 구조입니다. [5장](/cpu/05-multicore/)
+- **워크 스틸링**(work stealing) — 일이 없는 작업자가 다른 작업자의 대기열에서 일을 가져와 부하를 균형 있게 분산하는 방식입니다. Rayon이 사용합니다. [5장](/cpu/05-multicore/)
+- **암달의 법칙**(Amdahl's law) — 병렬화되지 않는 직렬 부분의 비율이 전체 병렬 성능 향상의 최대치를 제한한다는 법칙입니다. [5장](/cpu/05-multicore/)
 
-## コンパイラとRust
+## 컴파일러와 Rust
 
-- **中間表現**(intermediate representation、IR) — コンパイラ内部の
-  プログラム表現。rustcのMIR、LLVM IRなど。[6章](/rust-opt/06-compiler/)
-- **LLVM** — 多数の言語が共有するコンパイラ基盤。Rustの速度最適化の
-  大半を担う。[6章](/rust-opt/06-compiler/)
-- **定数畳み込み**(constant folding) — コンパイル時に計算できる式を
-  計算してしまう最適化。[6章](/rust-opt/06-compiler/)
-- **デッドコード除去**(dead code elimination) — 結果が使われない計算を
-  削除する最適化。[6章](/rust-opt/06-compiler/)
-- **共通部分式除去**(common subexpression elimination) — 同じ計算の
-  重複を1回にまとめる最適化。[6章](/rust-opt/06-compiler/)
-- **ループ不変式移動**(loop-invariant code motion) — ループ内で不変の
-  計算をループ外へ出す最適化。[6章](/rust-opt/06-compiler/)
-- **ループのアンローリング**(loop unrolling) — ループ本体を複数回分
-  展開する最適化。[6章](/rust-opt/06-compiler/)
-- **インライン化**(inlining) — 関数呼び出しを本体で置き換える最適化。
-  他の最適化の起点になる。[6章](/rust-opt/06-compiler/)
-- **opt-level** — 最適化の強さの設定。0(なし)〜3(最大)と
-  サイズ優先のs/z。releaseビルドの既定は3。[6章](/rust-opt/06-compiler/)
-- **codegen-units** — クレートを何分割して並列コンパイルするかの設定。
-  1にすると最適化の見通しが広がる。[6章](/rust-opt/06-compiler/)
-- **LTO**(link-time optimization) — リンク時にクレート横断で行う最適化。[6章](/rust-opt/06-compiler/)
-- **PGO**(profile-guided optimization) — 実行統計をもとにした最適化。[6章](/rust-opt/06-compiler/)
-- **エイリアス**(alias) — 複数の参照が同じメモリを指すこと。Rustは
-  型システムで「重ならない」ことをLLVMに保証できる。[6章](/rust-opt/06-compiler/)
-- **ゼロコスト抽象化**(zero-cost abstraction) — 使わない機能のコストは
-  なく、使う機能は手書き同等、という性質。[7章](/rust-opt/07-zero-cost/)
-- **境界チェック**(bounds check) — 添字アクセスが範囲内かの実行時検査。
-  単純なループではコンパイラが除去・ホイストする。[7章](/rust-opt/07-zero-cost/)
-- **niche最適化**(niche optimization) — 型の使われないビットパターンを
-  enumのタグに流用する最適化。`Option<&T>`は参照と同サイズ。[7章](/rust-opt/07-zero-cost/)
-- **単相化**(monomorphization) — ジェネリクスを使われる型ごとの専用
-  コードに展開すること。[7章](/rust-opt/07-zero-cost/)
-- **vtable**(仮想関数表) — トレイトオブジェクトが持ち歩くメソッドの
-  関数ポインタ表。[7章](/rust-opt/07-zero-cost/)
-- **動的ディスパッチ**(dynamic dispatch) — 実行時にvtableを引いて
-  メソッドを呼ぶ方式。[7章](/rust-opt/07-zero-cost/)
-- **脱仮想化**(devirtualization) — コンパイラが動的ディスパッチを
-  静的呼び出しに置き換える最適化。[7章](/rust-opt/07-zero-cost/)
+- **중간 표현**(intermediate representation, IR) — 컴파일러 내부에서 사용하는 프로그램 표현입니다. rustc의 MIR, LLVM IR 등이 있습니다. [6장](/rust-opt/06-compiler/)
+- **LLVM** — 여러 언어가 공유하는 컴파일러 최적화 및 코드 생성 기반입니다. Rust의 기계어 수준 최적화 상당 부분을 담당합니다. [6장](/rust-opt/06-compiler/)
+- **상수 폴딩**(constant folding) — 컴파일 시점에 계산 가능한 식을 미리 계산하는 최적화입니다. [6장](/rust-opt/06-compiler/)
+- **죽은 코드 제거**(dead code elimination) — 결과가 사용되지 않는 연산이나 코드 경로를 제거하는 최적화입니다. [6장](/rust-opt/06-compiler/)
+- **공통 부분식 제거**(common subexpression elimination) — 같은 계산이 반복되면 한 번 계산한 값을 재사용하는 최적화입니다. [6장](/rust-opt/06-compiler/)
+- **루프 불변 코드 이동**(loop-invariant code motion) — 루프 반복마다 같은 값을 만드는 계산을 루프 밖으로 옮기는 최적화입니다. [6장](/rust-opt/06-compiler/)
+- **루프 언롤링**(loop unrolling) — 루프 본문을 여러 번 펼쳐 분기 횟수와 제어 비용을 줄이는 최적화입니다. [6장](/rust-opt/06-compiler/)
+- **인라이닝**(inlining) — 함수 호출을 함수 본문으로 치환하는 최적화입니다. 다른 최적화를 가능하게 하는 출발점이 됩니다. [6장](/rust-opt/06-compiler/)
+- **opt-level** — 컴파일러 최적화 강도를 지정하는 설정입니다. `0`~`3`, 크기 우선의 `s`/`z` 등이 있습니다. [6장](/rust-opt/06-compiler/)
+- **codegen-units** — 크레이트를 몇 개의 코드 생성 단위로 나눌지 정하는 설정입니다. 값을 줄이면 병렬 컴파일은 줄지만 최적화 범위가 넓어질 수 있습니다. [6장](/rust-opt/06-compiler/)
+- **LTO**(link-time optimization) — 링크 단계에서 크레이트 경계를 넘어 수행하는 최적화입니다. [6장](/rust-opt/06-compiler/)
+- **PGO**(profile-guided optimization) — 실제 실행 프로파일을 이용해 코드 배치와 분기, 인라이닝 결정을 조정하는 최적화입니다. [6장](/rust-opt/06-compiler/)
+- **에일리어싱**(aliasing) — 여러 경로가 같은 메모리를 가리키는 현상입니다. Rust의 참조 규칙은 컴파일러가 에일리어싱 가능성을 더 강하게 제한할 수 있도록 합니다. [6장](/rust-opt/06-compiler/)
+- **제로 비용 추상화**(zero-cost abstraction) — 사용하지 않는 기능의 비용은 내지 않고, 사용하는 추상화도 직접 작성한 저수준 코드와 동등한 비용을 목표로 하는 원칙입니다. [7장](/rust-opt/07-zero-cost/)
+- **경계 검사**(bounds check) — 인덱스가 배열 범위 안인지 실행 시 확인하는 검사입니다. 단순한 루프에서는 컴파일러가 제거하거나 루프 밖으로 이동시킬 수 있습니다. [7장](/rust-opt/07-zero-cost/)
+- **niche 최적화**(niche optimization) — 타입에서 사용하지 않는 비트 패턴을 `enum`의 상태 표현에 재사용하는 최적화입니다. `Option<&T>`가 대표적입니다. [7장](/rust-opt/07-zero-cost/)
+- **단형화**(monomorphization) — 제네릭 코드를 실제로 사용된 구체 타입별 코드로 생성하는 과정입니다. [7장](/rust-opt/07-zero-cost/)
+- **vtable**(가상 함수 테이블) — 트레이트 객체가 동적 메서드 호출을 위해 참조하는 함수 포인터 테이블입니다. [7장](/rust-opt/07-zero-cost/)
+- **동적 디스패치**(dynamic dispatch) — 실행 시점에 vtable 등을 통해 실제 호출할 함수를 결정하는 방식입니다. [7장](/rust-opt/07-zero-cost/)
+- **탈가상화**(devirtualization) — 컴파일러가 동적 호출의 실제 대상을 알 수 있을 때 정적 호출로 바꾸는 최적화입니다. [7장](/rust-opt/07-zero-cost/)
 
-## 計測
+## 측정
 
-- **ベンチマーク**(benchmark) — 処理単体の実行時間を統計的に測ること。
-  Rustではcriterionが定番。[8章](/rust-opt/08-measure/)
-- **プロファイラ**(profiler) — プログラム全体のどこで時間が使われて
-  いるかを標本化で調べる道具。[8章](/rust-opt/08-measure/)
-- **フレームグラフ**(flame graph) — プロファイル結果の可視化。横幅が
-  時間、縦が呼び出し関係。[8章](/rust-opt/08-measure/)
-- **ハードウェアパフォーマンスカウンタ**(hardware performance counter) —
-  命令数・キャッシュミスなどを数えるCPU内蔵のカウンタ。[8章](/rust-opt/08-measure/)
-- **black_box** — 計測対象がコンパイラに削除されるのを防ぐ関数
-  (`std::hint::black_box`)。[7章](/rust-opt/07-zero-cost/)・[8章](/rust-opt/08-measure/)
+- **벤치마크**(benchmark) — 특정 작업의 실행 시간을 반복 측정하고 통계적으로 비교하는 방법입니다. Rust에서는 criterion이 널리 사용됩니다. [8장](/rust-opt/08-measure/)
+- **프로파일러**(profiler) — 프로그램 전체에서 시간이 어디에 사용되는지 샘플링 등으로 찾는 도구입니다. [8장](/rust-opt/08-measure/)
+- **플레임 그래프**(flame graph) — 프로파일 결과를 호출 스택 형태로 시각화합니다. 가로 폭이 시간 비율을 나타냅니다. [8장](/rust-opt/08-measure/)
+- **하드웨어 성능 카운터**(hardware performance counter) — 실행 명령 수, 캐시 미스, 분기 미스 등을 CPU가 직접 세는 카운터입니다. [8장](/rust-opt/08-measure/)
+- **black_box** — 컴파일러가 벤치마크 대상 연산을 제거하거나 지나치게 단순화하지 못하도록 값을 불투명하게 만드는 함수입니다. `std::hint::black_box`가 대표적입니다. [7장](/rust-opt/07-zero-cost/) · [8장](/rust-opt/08-measure/)
 
 ## GPU
 
-- **GPGPU**(general-purpose computing on GPU) — GPUを描画以外の
-  汎用計算に使うこと。[9章](/gpu/09-gpu-architecture/)
-- **レイテンシ指向/スループット指向**(latency-/throughput-oriented) —
-  1つの処理の速さを追うCPU的設計/総処理量を追うGPU的設計。[9章](/gpu/09-gpu-architecture/)
-- **SIMT**(single instruction, multiple threads) — スレッドの束に同じ
-  命令を実行させるGPUの実行モデル。[9章](/gpu/09-gpu-architecture/)
-- **ワープ**(warp) — 同じ命令をロックステップで実行する32本程度の
-  スレッドの束。WebGPUではサブグループ。[9章](/gpu/09-gpu-architecture/)
-- **ダイバージェンス**(divergence) — ワープ内で分岐が割れ、両側を順に
-  実行する状態。[9章](/gpu/09-gpu-architecture/)
-- **占有率**(occupancy) — レイテンシを隠すのに十分なワープが実行単位に
-  常駐できているかの指標。[9章](/gpu/09-gpu-architecture/)
-- **ワークグループ**(workgroup) — 共有メモリとバリアを使える
-  スレッドのグループ。CUDAのthread blockに相当。[9章](/gpu/09-gpu-architecture/)
-- **VRAM** — GPU専用の広帯域メモリ(GDDR/HBM)。[10章](/gpu/10-gpu-memory/)
-- **メモリコアレッシング**(memory coalescing) — ワープ内の隣接アドレスへの
-  アクセスを少数の転送に束ねる仕組み。[10章](/gpu/10-gpu-memory/)
-- **共有メモリ**(shared memory / workgroup memory) — ワークグループ内で
-  共有する、プログラマが明示的に管理する高速メモリ。[10章](/gpu/10-gpu-memory/)
-- **バリア**(barrier) — グループ内の全スレッドが到達するまで待つ同期点。[10章](/gpu/10-gpu-memory/)
-- **ユニファイドメモリ**(unified memory) — CPUとGPUが同じ物理メモリを
-  共有する構成。Apple Siliconなど。[10章](/gpu/10-gpu-memory/)
-- **算術強度**(arithmetic intensity) — 演算数÷転送バイト数(FLOP/byte)。[10章](/gpu/10-gpu-memory/)
-- **ルーフラインモデル**(roofline model) — 算術強度から性能上限を
-  見積もる図式。メモリ帯域律速と演算律速の2枚の屋根を持つ。[10章](/gpu/10-gpu-memory/)
-- **メモリ帯域律速/演算律速**(memory-/compute-bound) — 性能の上限が
-  帯域で/演算能力で決まっている状態。[10章](/gpu/10-gpu-memory/)
-- **シェーダ**(shader) — GPU上で実行されるプログラム。
-  計算用のものはカーネル(kernel)とも呼ばれる。[9章](/gpu/09-gpu-architecture/)
-- **FLOP**(floating-point operation) — 浮動小数点演算1回。
-  毎秒10億回がGFLOP/s、毎秒1兆回がTFLOP/s。[10章](/gpu/10-gpu-memory/)
-- **WGSL**(WebGPU Shading Language) — WebGPU標準のシェーダ言語。[11章](/gpu/11-wgpu/)
-- **wgpu** — WebGPU標準のRust実装。Metal/Vulkan/DX12を抽象化する。[11章](/gpu/11-wgpu/)
+- **GPGPU**(general-purpose computing on GPU) — GPU를 그래픽 렌더링이 아닌 범용 계산에 사용하는 방식입니다. [9장](/gpu/09-gpu-architecture/)
+- **지연 시간 중심 / 처리량 중심**(latency-oriented / throughput-oriented) — 한 작업을 빨리 끝내는 CPU식 설계와, 단위 시간당 전체 처리량을 높이는 GPU식 설계를 대비하는 표현입니다. [9장](/gpu/09-gpu-architecture/)
+- **SIMT**(single instruction, multiple threads) — 많은 GPU 스레드가 같은 명령어를 함께 실행하는 모델입니다. [9장](/gpu/09-gpu-architecture/)
+- **워프**(warp) — 같은 명령어를 함께 실행하는 약 32개 안팎의 스레드 묶음입니다. WebGPU에서는 subgroup이라는 용어를 사용합니다. [9장](/gpu/09-gpu-architecture/)
+- **분기 발산**(divergence) — 같은 워프 안의 스레드가 서로 다른 분기 경로로 나뉘어 여러 경로를 순서대로 실행해야 하는 현상입니다. [9장](/gpu/09-gpu-architecture/)
+- **점유율**(occupancy) — 실행 유닛에 동시에 상주하는 워프 수가 하드웨어 한도 대비 어느 정도인지 나타내는 지표입니다. [9장](/gpu/09-gpu-architecture/)
+- **워크그룹**(workgroup) — 공유 메모리와 배리어를 함께 사용할 수 있는 GPU 스레드 그룹입니다. CUDA의 thread block에 해당합니다. [9장](/gpu/09-gpu-architecture/)
+- **VRAM** — GPU가 사용하는 고대역폭 메모리입니다. GDDR, HBM 등이 사용됩니다. [10장](/gpu/10-gpu-memory/)
+- **메모리 코얼레싱**(memory coalescing) — 같은 워프의 인접한 주소 접근을 더 적은 메모리 트랜잭션으로 묶는 하드웨어 동작입니다. [10장](/gpu/10-gpu-memory/)
+- **공유 메모리**(shared memory / workgroup memory) — 워크그룹 안에서 스레드들이 공유하며 프로그래머가 직접 관리하는 빠른 메모리입니다. [10장](/gpu/10-gpu-memory/)
+- **배리어**(barrier) — 그룹의 모든 스레드가 도달할 때까지 기다리는 동기화 지점입니다. [10장](/gpu/10-gpu-memory/)
+- **유니파이드 메모리**(unified memory) — CPU와 GPU가 같은 물리 메모리 풀을 공유하는 구조입니다. Apple Silicon이 대표적입니다. [10장](/gpu/10-gpu-memory/)
+- **산술 강도**(arithmetic intensity) — 메모리에서 이동하는 바이트당 수행하는 연산 수를 나타내며 보통 FLOP/byte로 표현합니다. [10장](/gpu/10-gpu-memory/)
+- **루프라인 모델**(roofline model) — 산술 강도와 하드웨어의 연산 성능 및 메모리 대역폭으로 도달 가능한 성능 상한을 나타내는 모델입니다. [10장](/gpu/10-gpu-memory/)
+- **메모리 대역폭 한계 / 연산 한계**(memory-bound / compute-bound) — 성능이 메모리 대역폭 또는 연산 장치 성능에 의해 제한되는 상태입니다. [10장](/gpu/10-gpu-memory/)
+- **셰이더**(shader) — GPU에서 실행되는 프로그램입니다. 계산 목적의 셰이더를 커널(kernel)이라고 부르기도 합니다. [9장](/gpu/09-gpu-architecture/)
+- **FLOP**(floating-point operation) — 부동소수점 연산 한 번을 세는 단위입니다. GFLOP/s는 초당 10억 번, TFLOP/s는 초당 1조 번을 뜻합니다. [10장](/gpu/10-gpu-memory/)
+- **WGSL**(WebGPU Shading Language) — WebGPU 표준 셰이더 언어입니다. [11장](/gpu/11-wgpu/)
+- **wgpu** — WebGPU를 Rust에서 사용하는 구현으로 Metal, Vulkan, DirectX 12 같은 백엔드를 추상화합니다. [11장](/gpu/11-wgpu/)
 
-## 数の表現(応用編)
+## 수의 표현 — 응용편
 
-- **2の補数**(two's complement) — 符号つき整数の標準表現。最上位ビットの
-  重みを負にする。符号の有無で加算器を分けずに済む。[13章](/cpu-deep/13-numbers/)
-- **オーバーフロー**(overflow) — 演算結果が型の表現範囲を超えること。
-  Rustではdebugビルドで検査、releaseは既定で回り込み(設定で変更可)。[13章](/cpu-deep/13-numbers/)
-- **IEEE 754** — 浮動小数点数の標準。±(1.仮数)×2^指数の2進表現。[13章](/cpu-deep/13-numbers/)
-- **Kahanの総和**(Kahan summation) — 加算でこぼれた丸め誤差を
-  補正変数に回収する総和アルゴリズム。[13章](/cpu-deep/13-numbers/)
-- **NaN**(not a number) — 不正な演算の結果を表す特殊値。
-  自分自身とも等しくない。ソートには`total_cmp`。[13章](/cpu-deep/13-numbers/)
-- **非正規化数**(subnormal) — 最小の正規化数より小さい値を精度を
-  犠牲に表す仕組み。演算速度はハードウェア依存。[13章](/cpu-deep/13-numbers/)
-- **bf16**(bfloat16) — f32の上位16ビットを切り出した形式。指数幅が
-  f32と同じため値の範囲が変わらない。ML計算の主役。[13章](/cpu-deep/13-numbers/)
-- **量子化**(quantization) — 重みなどをint8/int4等の狭い表現に
-  変換して詰め込む技法。[25章](/gpu-deep/25-matrix-engines/)
+- **2의 보수**(two's complement) — 부호 있는 정수를 표현하는 표준 방식입니다. 최상위 비트에 음수 가중치를 부여해 부호 있는 덧셈과 없는 덧셈이 같은 회로를 사용할 수 있습니다. [13장](/cpu-deep/13-numbers/)
+- **오버플로**(overflow) — 연산 결과가 타입의 표현 범위를 벗어나는 상황입니다. Rust에서는 debug 빌드에서 기본적으로 검사하고 release에서는 기본적으로 래핑됩니다. [13장](/cpu-deep/13-numbers/)
+- **IEEE 754** — 부동소수점 수를 부호, 지수, 가수로 표현하는 국제 표준입니다. [13장](/cpu-deep/13-numbers/)
+- **Kahan 합계**(Kahan summation) — 덧셈 과정에서 잃어버린 반올림 오차를 보정 변수로 추적해 합계 정확도를 높이는 알고리즘입니다. [13장](/cpu-deep/13-numbers/)
+- **NaN**(not a number) — 유효한 실수 결과가 아닌 연산을 나타내는 IEEE 754 특수 값입니다. 자기 자신과도 같지 않게 비교됩니다. [13장](/cpu-deep/13-numbers/)
+- **서브노멀 수**(subnormal) — 가장 작은 정규화 수보다 작은 값을 정밀도를 줄여 표현하는 부동소수점 값입니다. [13장](/cpu-deep/13-numbers/)
+- **bf16**(bfloat16) — f32와 같은 지수 폭을 유지하면서 가수 폭을 크게 줄인 16비트 부동소수점 형식입니다. 머신러닝에서 널리 사용됩니다. [13장](/cpu-deep/13-numbers/)
+- **양자화**(quantization) — 모델 가중치나 데이터를 int8/int4 같은 더 좁은 표현으로 변환해 메모리와 연산 비용을 줄이는 기법입니다. [25장](/gpu-deep/25-matrix-engines/)
 
-## 仮想メモリとキャッシュ内部(応用編)
+## 가상 메모리와 캐시 내부 — 응용편
 
-- **仮想メモリ**(virtual memory) — プログラムが見る仮想アドレスを
-  物理アドレスへ変換する仕組みの総称。隔離・連続の錯覚・遅延と共有を
-  提供する。[14章](/cpu-deep/14-virtual-memory/)
-- **ページ**(page) — アドレス変換の単位。4KBが主流(Apple Siliconは16KB)。[14章](/cpu-deep/14-virtual-memory/)
-- **ページテーブル**(page table) — 仮想→物理の変換表。多段の木構造。[14章](/cpu-deep/14-virtual-memory/)
-- **MMU**(memory management unit) — アドレス変換を行うCPU内の装置。[14章](/cpu-deep/14-virtual-memory/)
-- **ページウォーク**(page walk) — 多段ページテーブルをたどる処理。
-  最悪でメモリアクセス4回ぶん。[14章](/cpu-deep/14-virtual-memory/)
-- **TLB**(translation lookaside buffer) — アドレス変換結果のキャッシュ。
-  覆える範囲は4KBページで10MB程度と狭い。[14章](/cpu-deep/14-virtual-memory/)
-- **hugepages** — 2MB/1GBの大きなページ。TLBの覆える範囲を広げる。
-  Linuxの自動版がTHP。[14章](/cpu-deep/14-virtual-memory/)
-- **デマンドページング**(demand paging) — 物理メモリの割り当てを
-  初回アクセスまで遅らせる方式。[14章](/cpu-deep/14-virtual-memory/)
-- **ページフォールト**(page fault) — 実体のないページへのアクセスで
-  発生する例外。OSが物理フレームを割り当てて再実行する。[14章](/cpu-deep/14-virtual-memory/)
-- **コピーオンライト**(copy-on-write、COW) — 共有しておき、書き込みの
-  瞬間に複製する技法。[14章](/cpu-deep/14-virtual-memory/)
-- **mmap**(memory map) — ファイルを仮想アドレス空間に貼り付ける
-  システムコール。[14章](/cpu-deep/14-virtual-memory/)・[27章](/systems/27-os-layer/)
-- **セットアソシアティブ**(set-associative) — キャッシュの配置方式。
-  アドレスで決まるセットの中の任意のウェイに置く。[15章](/cpu-deep/15-cache-internals/)
-- **セット/ウェイ/タグ**(set/way/tag) — キャッシュの区画・区画内の枠・
-  照合用のアドレス上位ビット。[15章](/cpu-deep/15-cache-internals/)
-- **競合性ミス**(conflict miss) — 容量は余っているのに特定セットの
-  取り合いで起きるミス。初回(cold)・容量性(capacity)と並ぶ3分類の1つ。[15章](/cpu-deep/15-cache-internals/)
-- **キャッシュブロッキング**(cache blocking) — 走査をキャッシュに収まる
-  ブロック単位に分ける技法。タイリングとも。[15章](/cpu-deep/15-cache-internals/)
-- **cache-oblivious** — キャッシュ容量を知らずに再帰分割で全階層に
-  適応するアルゴリズム設計。[15章](/cpu-deep/15-cache-internals/)
+- **가상 메모리**(virtual memory) — 프로그램이 사용하는 가상 주소를 실제 물리 주소로 변환하는 전체 메커니즘입니다. 프로세스 격리와 지연 할당, 공유 등을 가능하게 합니다. [14장](/cpu-deep/14-virtual-memory/)
+- **페이지**(page) — 가상 주소 변환과 메모리 관리의 기본 단위입니다. 4KB가 흔하며 Apple Silicon은 16KB를 주로 사용합니다. [14장](/cpu-deep/14-virtual-memory/)
+- **페이지 테이블**(page table) — 가상 페이지를 물리 프레임에 대응시키는 다단계 변환 자료구조입니다. [14장](/cpu-deep/14-virtual-memory/)
+- **MMU**(memory management unit) — CPU에서 가상 주소를 물리 주소로 변환하는 하드웨어입니다. [14장](/cpu-deep/14-virtual-memory/)
+- **페이지 워크**(page walk) — 필요한 주소 변환을 찾기 위해 다단계 페이지 테이블을 따라가는 과정입니다. [14장](/cpu-deep/14-virtual-memory/)
+- **TLB**(translation lookaside buffer) — 최근 사용한 가상→물리 주소 변환 결과를 저장하는 캐시입니다. [14장](/cpu-deep/14-virtual-memory/)
+- **hugepages** — 2MB, 1GB처럼 일반 페이지보다 큰 페이지를 사용해 TLB 커버리지를 늘리는 기능입니다. Linux의 THP가 자동 적용 방식 중 하나입니다. [14장](/cpu-deep/14-virtual-memory/)
+- **디맨드 페이징**(demand paging) — 실제 물리 메모리 할당을 최초 접근 시점까지 미루는 메커니즘입니다. [14장](/cpu-deep/14-virtual-memory/)
+- **페이지 폴트**(page fault) — 현재 매핑되지 않았거나 아직 실체화되지 않은 페이지에 접근할 때 발생하는 예외입니다. OS가 필요한 조치를 한 뒤 명령을 다시 실행합니다. [14장](/cpu-deep/14-virtual-memory/)
+- **카피 온 라이트**(copy-on-write, COW) — 데이터를 우선 공유하고 실제 쓰기가 발생할 때만 복사하는 방식입니다. [14장](/cpu-deep/14-virtual-memory/)
+- **mmap**(memory map) — 파일이나 메모리 객체를 프로세스의 가상 주소 공간에 매핑하는 시스템 콜입니다. [14장](/cpu-deep/14-virtual-memory/) · [27장](/systems/27-os-layer/)
+- **세트 연관**(set-associative) — 주소로 정해지는 하나의 캐시 세트 안에서 여러 웨이 중 하나를 선택해 캐시 라인을 저장하는 방식입니다. [15장](/cpu-deep/15-cache-internals/)
+- **세트 / 웨이 / 태그**(set / way / tag) — 캐시의 그룹, 그룹 안의 저장 슬롯, 그리고 실제 주소가 맞는지 비교하는 주소 상위 비트를 뜻합니다. [15장](/cpu-deep/15-cache-internals/)
+- **충돌 미스**(conflict miss) — 캐시 전체 용량은 충분하지만 여러 주소가 같은 세트에 몰려 생기는 캐시 미스입니다. 콜드 미스, 용량 미스와 함께 대표적인 세 분류입니다. [15장](/cpu-deep/15-cache-internals/)
+- **캐시 블로킹**(cache blocking) — 작업을 캐시에 들어가는 작은 블록으로 나누어 지역성을 높이는 기법입니다. 타일링이라고도 부릅니다. [15장](/cpu-deep/15-cache-internals/)
+- **cache-oblivious** — 구체적인 캐시 크기를 모르더라도 재귀 분할로 여러 캐시 계층에 자연스럽게 맞도록 설계하는 알고리즘 방식입니다. [15장](/cpu-deep/15-cache-internals/)
 
-## CPU実行の深層(応用編)
+## CPU 실행의 심층 — 응용편
 
-- **フロントエンド/バックエンド**(front end / back end) — 命令の供給側と
-  実行側。どちらか遅い方が律速する。[16章](/cpu-deep/16-frontend/)
-- **μop**(micro-operation) — CPU内部の固定形式命令。x86の可変長命令は
-  デコードでμopに分解される。[16章](/cpu-deep/16-frontend/)
-- **BTB**(branch target buffer) — 分岐の「行き先アドレス」を覚える表。
-  間接分岐の予測に使う。[16章](/cpu-deep/16-frontend/)
-- **間接分岐**(indirect branch) — 飛び先がレジスタ値で決まる分岐。
-  関数ポインタ、vtable、matchのジャンプテーブル。[16章](/cpu-deep/16-frontend/)
-- **top-down分析**(top-down analysis) — 発行スロットをRetiring/
-  Bad Speculation/Frontend Bound/Backend Boundの4分類で切り分ける
-  性能診断法。[16章](/cpu-deep/16-frontend/)
-- **ストアバッファ**(store buffer) — 書き込みを一時的に溜めるコア内の
-  待ち行列。ストア→ロードの並べ替えの原因。[17章](/cpu-deep/17-memory-model/)
-- **メモリモデル**(memory model) — CPUが許すメモリ操作の並べ替えの範囲。
-  x86はTSO(強い)、ARMはweak(弱い)。[17章](/cpu-deep/17-memory-model/)
-- **CAS**(compare-and-swap) — 「期待値と一致したら書き換える」を1つの
-  アトミック操作で行う命令。ロックフリーの基礎。[17章](/cpu-deep/17-memory-model/)
-- **ABA問題** — 値がA→B→Aと戻ったためCASが変更を見逃す問題。[17章](/cpu-deep/17-memory-model/)
-- **エポックベース回収**(epoch-based reclamation) — ロックフリー構造の
-  メモリを世代管理で安全に解放する方式。crossbeamが実装。[17章](/cpu-deep/17-memory-model/)
+- **프런트엔드 / 백엔드**(front end / back end) — 명령어를 가져오고 디코드해 공급하는 앞단과 실제 실행 유닛에서 처리하는 뒷단입니다. [16장](/cpu-deep/16-frontend/)
+- **μop**(micro-operation) — CPU 내부에서 사용하는 고정 형태의 마이크로 연산입니다. x86 가변 길이 명령어는 디코드 과정에서 μop으로 나뉩니다. [16장](/cpu-deep/16-frontend/)
+- **BTB**(branch target buffer) — 분기 명령의 대상 주소를 예측하기 위해 최근 목적지를 저장하는 하드웨어 테이블입니다. [16장](/cpu-deep/16-frontend/)
+- **간접 분기**(indirect branch) — 점프 대상이 레지스터나 메모리 값으로 결정되는 분기입니다. 함수 포인터, vtable 호출, 점프 테이블 등이 대표적입니다. [16장](/cpu-deep/16-frontend/)
+- **top-down 분석**(top-down analysis) — CPU 발행 슬롯을 Retiring, Bad Speculation, Frontend Bound, Backend Bound로 분류해 병목을 좁혀 가는 성능 진단 방법입니다. [16장](/cpu-deep/16-frontend/)
+- **스토어 버퍼**(store buffer) — CPU 코어가 쓰기를 잠시 보관하는 대기열입니다. 스토어→로드 재정렬을 가능하게 하는 주요 원인입니다. [17장](/cpu-deep/17-memory-model/)
+- **메모리 모델**(memory model) — CPU와 언어가 메모리 연산의 관찰 순서를 어디까지 보장하는지 정의한 규칙입니다. x86 TSO는 비교적 강하고 ARM은 더 약한 모델을 사용합니다. [17장](/cpu-deep/17-memory-model/)
+- **CAS**(compare-and-swap) — 현재 값이 기대값과 같을 때만 새 값으로 바꾸는 원자적 연산입니다. 락프리 자료구조의 핵심 도구입니다. [17장](/cpu-deep/17-memory-model/)
+- **ABA 문제** — 값이 A→B→A로 바뀌어 CAS가 중간 변경을 알아채지 못하는 문제입니다. [17장](/cpu-deep/17-memory-model/)
+- **에포크 기반 회수**(epoch-based reclamation) — 락프리 자료구조에서 다른 스레드가 더 이상 참조하지 않는 메모리를 세대 단위로 안전하게 해제하는 방법입니다. crossbeam이 관련 기능을 제공합니다. [17장](/cpu-deep/17-memory-model/)
 
-## Rustの深層(応用編)
+## Rust의 심층 — 응용편
 
-- **アロケータ**(allocator) — OSから仕入れたメモリを小口で貸すヒープの
-  管理機構。サイズクラス+スレッドキャッシュが現代の定石。[18章](/rust-deep/18-allocators/)
-- **サイズクラス/フリーリスト**(size class / free list) — 規格サイズごとの
-  在庫管理。確保・解放の速い経路を支える。[18章](/rust-deep/18-allocators/)
-- **断片化**(fragmentation) — 切り上げの無駄(内部)と虫食いの空き(外部)。[18章](/rust-deep/18-allocators/)
-- **アリーナ確保**(arena allocation) — 同じ寿命のものを1つの塊に置き、
-  まとめて解放する方式。確保はポインタを進めるだけ(バンプ
-  アロケーション)。[18章](/rust-deep/18-allocators/)
-- **Future** — asyncの「実行の計画書」。`.await`で分割された状態機械。
-  中断中の変数はFutureの中に保存される。[19章](/rust-deep/19-async/)
-- **poll/Waker** — ランタイムがFutureを駆動する規約。「進めてください」と
-  「準備できたら起こしてください」。[19章](/rust-deep/19-async/)
-- **spawn_blocking** — ブロッキング処理を専用スレッドプールへ隔離する
-  tokioのAPI。[19章](/rust-deep/19-async/)
-- **未定義動作**(undefined behavior、UB) — コンパイラの最適化前提を破る
-  操作。挙動の一切が保証されなくなる。クラッシュするとは限らない。[20章](/rust-deep/20-unsafe-ub/)
-- **Miri** — MIRを解釈実行してUBを検出するツール。[20章](/rust-deep/20-unsafe-ub/)
-- **FFI**(foreign function interface) — C ABIを介した他言語との相互運用。
-  呼び出し自体は安価で、コストは最適化境界と表現変換にある。[20章](/rust-deep/20-unsafe-ub/)
-- **BOLT** — リンク済みバイナリを実行プロファイルで並べ替える最適化ツール。[21章](/rust-deep/21-build-control/)
-- **SwissTable** — Rustの`HashMap`の実装方式。制御バイト配列を
-  SIMDで探査する。[22章](/rust-deep/22-data-structures/)
-- **HashDoS** — 衝突するキーを大量に送ってハッシュ表をO(n)に退化させる
-  攻撃。既定のSipHashはこれへの耐性を持つ。[22章](/rust-deep/22-data-structures/)
-- **インターニング**(interning) — 同じ値を1か所に登録し整数IDで持ち回る
-  技法。比較が整数比較になる。[22章](/rust-deep/22-data-structures/)
-- **ビットセット**(bitset) — 整数集合を1要素1ビットで表す構造。
-  所属判定はシフトとANDだけ。[22章](/rust-deep/22-data-structures/)
+- **할당자**(allocator) — OS에서 받은 큰 메모리 영역을 작은 동적 할당 요청에 나눠 제공하는 힙 관리 시스템입니다. [18장](/rust-deep/18-allocators/)
+- **크기 클래스 / 프리 리스트**(size class / free list) — 할당 크기를 몇 가지 규격으로 나누고 해제된 블록을 크기별 목록으로 관리하는 구조입니다. [18장](/rust-deep/18-allocators/)
+- **단편화**(fragmentation) — 할당 크기 반올림으로 내부 공간이 낭비되는 내부 단편화와, 빈 공간이 조각나 큰 연속 영역을 만들기 어려워지는 외부 단편화를 뜻합니다. [18장](/rust-deep/18-allocators/)
+- **아레나 할당**(arena allocation) — 비슷한 수명을 가진 객체를 큰 메모리 덩어리에 함께 배치하고 한꺼번에 버리는 할당 방식입니다. 포인터만 증가시키는 범프 할당과 자주 결합됩니다. [18장](/rust-deep/18-allocators/)
+- **Future** — async 작업의 실행 상태를 담는 상태 머신입니다. `.await`를 가로질러 살아 있는 변수는 Future에 저장됩니다. [19장](/rust-deep/19-async/)
+- **poll / Waker** — 런타임이 Future에 진행 가능 여부를 묻고, 대기 대상이 준비되면 Future를 다시 깨우는 실행 규약입니다. [19장](/rust-deep/19-async/)
+- **spawn_blocking** — 오래 블로킹될 수 있는 작업을 별도의 스레드 풀로 보내는 tokio API입니다. [19장](/rust-deep/19-async/)
+- **정의되지 않은 동작**(undefined behavior, UB) — Rust와 LLVM이 기대하는 안전 전제를 깨뜨려 프로그램 동작에 대한 언어 차원의 보장이 사라지는 상태입니다. 반드시 크래시하는 것은 아닙니다. [20장](/rust-deep/20-unsafe-ub/)
+- **Miri** — MIR을 해석 실행하면서 정의되지 않은 동작을 탐지하는 Rust 도구입니다. [20장](/rust-deep/20-unsafe-ub/)
+- **FFI**(foreign function interface) — C ABI 등을 통해 다른 언어와 호출하고 데이터를 주고받는 방식입니다. 호출 자체보다 최적화 경계와 데이터 변환 비용이 더 중요할 수 있습니다. [20장](/rust-deep/20-unsafe-ub/)
+- **BOLT** — 실행 프로파일을 바탕으로 링크가 끝난 바이너리의 코드 배치를 다시 최적화하는 도구입니다. [21장](/rust-deep/21-build-control/)
+- **SwissTable** — Rust `HashMap`이 사용하는 계열의 해시 테이블 구현입니다. 제어 바이트를 그룹 단위로 SIMD 탐색합니다. [22장](/rust-deep/22-data-structures/)
+- **HashDoS** — 공격자가 의도적으로 해시 충돌을 만들어 해시 테이블을 느리게 만드는 서비스 거부 공격입니다. Rust 기본 해시가 이를 고려합니다. [22장](/rust-deep/22-data-structures/)
+- **인터닝**(interning) — 같은 문자열이나 값을 한 번만 저장하고 이후에는 작은 정수 ID 등으로 참조하는 기법입니다. [22장](/rust-deep/22-data-structures/)
+- **비트셋**(bitset) — 유한한 정수 집합을 원소당 한 비트로 표현하는 자료구조입니다. 포함 여부 검사는 시프트와 비트 연산으로 처리할 수 있습니다. [22장](/rust-deep/22-data-structures/)
 
-## GPUの深層(応用編)
+## GPU의 심층 — 응용편
 
-- **reduction**(リダクション) — 配列全体を1つの値に畳む計算の総称。
-  総和・最大値など。[23章](/gpu-deep/23-kernel-optimization/)
-- **グリッドストライドループ**(grid-stride loop) — スレッドが総スレッド数
-  ずつ跳びながら全体を覆うループ。コアレッシングを保つ。[23章](/gpu-deep/23-kernel-optimization/)
-- **スレッド粗粒度化**(thread coarsening) — 1スレッドの担当を増やして
-  同期と起動のコストを薄める技法。[23章](/gpu-deep/23-kernel-optimization/)
-- **subgroup命令** — ワープ内の集約・交換をバリアなしで行う命令群。
-  CUDAのwarp shuffleに相当。[23章](/gpu-deep/23-kernel-optimization/)
-- **ダブルバッファリング**(double buffering) — 2組のバッファを交互に使い、
-  転送と処理を重ねる古典技法。[24章](/gpu-deep/24-overlap/)
-- **行列エンジン**(matrix engine) — 行列タイル同士の乗算累積を専用回路で
-  行うユニット。テンソルコア、Apple AMX、Intel AMXなど。[25章](/gpu-deep/25-matrix-engines/)
-- **BLAS**(basic linear algebra subprograms) — 線形代数ライブラリの
-  標準インターフェース。Accelerate/OpenBLAS/cuBLAS等が実装。[25章](/gpu-deep/25-matrix-engines/)
-- **タイムスタンプクエリ**(timestamp query) — GPU自身の時計をコマンド列の
-  特定位置で記録する計測機構。[26章](/gpu-deep/26-gpu-timing/)
+- **리덕션**(reduction) — 배열 전체를 합계나 최댓값처럼 하나의 값으로 축약하는 계산 패턴입니다. [23장](/gpu-deep/23-kernel-optimization/)
+- **그리드 스트라이드 루프**(grid-stride loop) — 각 GPU 스레드가 전체 스레드 수만큼 인덱스를 건너뛰며 여러 원소를 처리하는 루프입니다. 인접 스레드의 코얼레싱을 유지하기 좋습니다. [23장](/gpu-deep/23-kernel-optimization/)
+- **스레드 조대화**(thread coarsening) — 한 GPU 스레드가 담당하는 작업량을 늘려 스레드 수와 동기화 비용을 줄이는 기법입니다. [23장](/gpu-deep/23-kernel-optimization/)
+- **subgroup 명령** — 같은 워프나 subgroup 내부에서 데이터를 교환하거나 합계를 구하는 전용 연산입니다. CUDA의 warp shuffle과 비슷합니다. [23장](/gpu-deep/23-kernel-optimization/)
+- **더블 버퍼링**(double buffering) — 두 세트의 버퍼를 번갈아 사용해 전송과 계산 같은 단계를 겹치는 기법입니다. [24장](/gpu-deep/24-overlap/)
+- **행렬 엔진**(matrix engine) — 작은 행렬 타일의 곱셈-누산을 전용 회로로 처리하는 하드웨어입니다. NVIDIA Tensor Core, Apple AMX, Intel AMX 등이 있습니다. [25장](/gpu-deep/25-matrix-engines/)
+- **BLAS**(basic linear algebra subprograms) — 기본 선형대수 연산에 대한 표준 API 집합입니다. Accelerate, OpenBLAS, cuBLAS 등이 구현합니다. [25장](/gpu-deep/25-matrix-engines/)
+- **타임스탬프 쿼리**(timestamp query) — GPU 명령 스트림의 특정 위치에서 GPU 자체 시계 값을 기록해 커널 실행 시간을 측정하는 기능입니다. [26장](/gpu-deep/26-gpu-timing/)
 
-## システムと実践(応用編)
+## 시스템과 실전 — 응용편
 
-- **システムコール**(system call) — カーネルへの保護された依頼。
-  本書のPlayground実測では通常の関数呼び出しの100倍超のコスト。[27章](/systems/27-os-layer/)
-- **コンテキストスイッチ**(context switch) — スレッド/プロセスの切り替え。
-  スレッド間の起こし合い1往復は実測で十数マイクロ秒+キャッシュの冷え。[27章](/systems/27-os-layer/)
-- **ページキャッシュ**(page cache) — OSがファイル内容をメモリに保持する
-  キャッシュ。2回目以降の読みはメモリ速度。[27章](/systems/27-os-layer/)
-- **vDSO** — カーネルが一部の機能(時刻取得など)をユーザー空間に
-  公開してシステムコールを省く仕組み。[27章](/systems/27-os-layer/)
-- **io_uring** — 提出/完了のリングバッファを共有してシステムコールを
-  減らすLinuxのI/O機構。[27章](/systems/27-os-layer/)
-- **パーセンタイル**(percentile) — 分布の位置を示す統計量。p99は
-  「100回に1回の遅さ」。レイテンシは平均でなく分布で語る。[28章](/systems/28-performance-engineering/)
-- **協調的省略**(coordinated omission) — 応答を待ってから次を送る計測が、
-  遅い期間のサンプルを取り落としてp99を過小評価する罠。[28章](/systems/28-performance-engineering/)
+- **시스템 콜**(system call) — 사용자 프로그램이 커널 기능을 호출하는 보호된 인터페이스입니다. 이 책의 Playground 실측에서는 일반 함수 호출보다 100배 이상 비쌌습니다. [27장](/systems/27-os-layer/)
+- **컨텍스트 스위치**(context switch) — CPU가 실행 중인 스레드나 프로세스의 상태를 저장하고 다른 실행 흐름으로 전환하는 작업입니다. [27장](/systems/27-os-layer/)
+- **페이지 캐시**(page cache) — OS가 파일 내용을 메모리에 보관해 반복 I/O를 빠르게 처리하는 캐시입니다. [27장](/systems/27-os-layer/)
+- **vDSO** — 커널이 일부 기능을 사용자 공간에 읽기 전용 데이터와 코드 형태로 노출해 시스템 콜을 피하도록 하는 메커니즘입니다. [27장](/systems/27-os-layer/)
+- **io_uring** — 제출과 완료 링 버퍼를 사용자 공간과 커널이 공유해 시스템 콜 횟수를 줄이는 Linux 비동기 I/O 인터페이스입니다. [27장](/systems/27-os-layer/)
+- **퍼센타일**(percentile) — 분포에서 값의 위치를 나타내는 통계량입니다. p99는 관측값의 99%가 그 값 이하라는 뜻이며 꼬리 지연을 표현할 때 사용합니다. [28장](/systems/28-performance-engineering/)
+- **coordinated omission** — 부하 생성기가 응답을 기다리는 동안 새 요청을 보내지 않아, 실제로 느렸던 기간의 샘플을 측정에서 놓치는 오류입니다. [28장](/systems/28-performance-engineering/)
