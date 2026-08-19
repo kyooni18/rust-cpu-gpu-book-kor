@@ -8,19 +8,19 @@ struct BoxNode {
 
 struct ArenaNode {
     value: u64,
-    next: u32, // アリーナ内の添字。u32::MAXを終端とする
+    next: u32, // 아레나 내부 인덱스. u32::MAX를 끝 표시로 사용합니다
 }
 
 fn main() {
     let n = 1_000_000u32;
 
-    // (1) ノードごとにヒープ確保する連結リスト
+    // (1) 노드마다 힙 할당하는 연결 리스트
     let start = Instant::now();
     let mut head: Option<Box<BoxNode>> = None;
     for i in 0..n {
         head = Some(Box::new(BoxNode { value: i as u64, next: head.take() }));
     }
-    println!("Box   構築: {:>9.3?}", start.elapsed());
+    println!("Box    생성: {:>9.3?}", start.elapsed());
 
     let start = Instant::now();
     let mut sum = 0u64;
@@ -29,17 +29,17 @@ fn main() {
         sum = sum.wrapping_add(node.value);
         cur = node.next.as_deref();
     }
-    println!("Box   走査: {:>9.3?} (sum={sum})", start.elapsed());
+    println!("Box    순회: {:>9.3?} (sum={sum})", start.elapsed());
 
-    // 再帰dropのスタックオーバーフローを避けるため手動で解体しつつ計測
+    // 재귀 drop으로 스택 오버플로가 나지 않도록 직접 해체하면서 측정합니다
     let start = Instant::now();
     let mut cur = head;
     while let Some(mut node) = cur {
         cur = node.next.take();
     }
-    println!("Box   解放: {:>9.3?}", start.elapsed());
+    println!("Box    해제: {:>9.3?}", start.elapsed());
 
-    // (2) アリーナ(1本のVec)にまとめて置く連結リスト
+    // (2) 아레나(하나의 Vec)에 모아서 저장하는 연결 리스트
     let start = Instant::now();
     let mut arena: Vec<ArenaNode> = Vec::with_capacity(n as usize);
     let mut head = u32::MAX;
@@ -47,7 +47,7 @@ fn main() {
         arena.push(ArenaNode { value: i as u64, next: head });
         head = i;
     }
-    println!("アリーナ構築: {:>9.3?}", start.elapsed());
+    println!("아레나 생성: {:>9.3?}", start.elapsed());
 
     let start = Instant::now();
     let mut sum = 0u64;
@@ -57,10 +57,10 @@ fn main() {
         sum = sum.wrapping_add(node.value);
         cur = node.next;
     }
-    println!("アリーナ走査: {:>9.3?} (sum={sum})", start.elapsed());
+    println!("아레나 순회: {:>9.3?} (sum={sum})", start.elapsed());
 
     let start = Instant::now();
     drop(arena);
     black_box(());
-    println!("アリーナ解放: {:>9.3?}", start.elapsed());
+    println!("아레나 해제: {:>9.3?}", start.elapsed());
 }
