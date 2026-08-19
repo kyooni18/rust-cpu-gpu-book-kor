@@ -1,5 +1,5 @@
-//! 23章: GPUのreduction(総和)を3段階で最適化する。
-//! 実行: cd examples && cargo run --release -p ch23-reduction
+//! 23장: GPU reduction(합계)을 세 단계로 최적화합니다.
+//! 실행: cd examples && cargo run --release -p ch23-reduction
 
 use std::num::NonZeroU64;
 use std::time::Instant;
@@ -13,21 +13,21 @@ fn xorshift(state: &mut u64) -> u64 {
 }
 
 fn main() {
-    let n = 16 * 1024 * 1024usize; // 1677万要素
+    let n = 16 * 1024 * 1024usize; // 1,677만 원소
     let mut state = 0x2545_F491_4F6C_DD1Du64;
     let data: Vec<u32> = (0..n).map(|_| (xorshift(&mut state) & 0x7F) as u32).collect();
 
-    // CPUでの答えと時間
+    // CPU에서 정답과 실행 시간을 구합니다
     let start = Instant::now();
     let expected: u64 = data.iter().map(|&x| x as u64).sum();
     let cpu_time = start.elapsed();
-    println!("CPU(1コア)     : {cpu_time:>9.3?} (sum={expected})");
+    println!("CPU(1코어)      : {cpu_time:>9.3?} (sum={expected})");
 
-    // ---- GPUの準備 ----
+    // ---- GPU 준비 ----
     let instance = wgpu::Instance::new(wgpu::InstanceDescriptor::new_without_display_handle());
     let adapter =
         pollster::block_on(instance.request_adapter(&wgpu::RequestAdapterOptions::default()))
-            .expect("GPUが見つかりません");
+            .expect("GPU를 찾을 수 없습니다");
     println!("GPU: {}", adapter.get_info().name);
     let (device, queue) = pollster::block_on(adapter.request_device(&wgpu::DeviceDescriptor {
         label: None,
@@ -37,7 +37,7 @@ fn main() {
         memory_hints: wgpu::MemoryHints::MemoryUsage,
         trace: wgpu::Trace::Off,
     }))
-    .expect("デバイスの作成に失敗");
+    .expect("Device 생성에 실패했습니다");
 
     let module = device.create_shader_module(wgpu::include_wgsl!("reduce.wgsl"));
     let buf_in = device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
@@ -96,19 +96,19 @@ fn main() {
         })
     };
 
-    // (バリアント名, エントリポイント, ディスパッチ形状)
-    let groups_2d = ((n / 256).div_ceil(256)) as u32; // 256x256=65536グループ
+    // (버전 이름, 엔트리 포인트, 디스패치 형태)
+    let groups_2d = ((n / 256).div_ceil(256)) as u32; // 256x256=65,536개 그룹
     let variants: [(&str, &str, (u32, u32)); 3] = [
-        ("v1 全部atomic     ", "reduce_atomic", (256, groups_2d)),
-        ("v2 共有メモリの木 ", "reduce_shared", (256, groups_2d)),
-        ("v3 64要素/スレッド", "reduce_multi", (1024, 1)),
+        ("v1 모두 atomic       ", "reduce_atomic", (256, groups_2d)),
+        ("v2 공유 메모리 트리 ", "reduce_shared", (256, groups_2d)),
+        ("v3 스레드당 64원소  ", "reduce_multi", (1024, 1)),
     ];
 
     for (name, entry, (gx, gy)) in variants {
         let pipeline = make_pipeline(entry);
-        // ウォームアップ1回 + 計測1回
+        // 워밍업 한 번 + 측정 한 번
         for round in 0..2 {
-            queue.write_buffer(&buf_result, 0, &[0u8; 4]); // 合計を0に戻す
+            queue.write_buffer(&buf_result, 0, &[0u8; 4]); // 합계를 0으로 되돌립니다
             let start = Instant::now();
             let mut encoder =
                 device.create_command_encoder(&wgpu::CommandEncoderDescriptor::default());
@@ -122,7 +122,7 @@ fn main() {
             queue.submit([encoder.finish()]);
             let slice = buf_read.slice(..);
             slice.map_async(wgpu::MapMode::Read, |r| {
-                r.expect("バッファのマップに失敗しました");
+                r.expect("버퍼 매핑에 실패했습니다");
             });
             device.poll(wgpu::PollType::wait_indefinitely()).unwrap();
             let got = {
@@ -135,7 +135,7 @@ fn main() {
                 println!(
                     "{name}: {:>9.3?} (sum={got}{})",
                     start.elapsed(),
-                    if ok { "" } else { " 検証NG!" }
+                    if ok { "" } else { " 검증 실패!" }
                 );
             }
         }
