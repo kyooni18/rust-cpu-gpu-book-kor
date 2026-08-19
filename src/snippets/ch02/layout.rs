@@ -1,6 +1,6 @@
 use std::mem::{align_of, size_of};
 
-// フィールドの並び順はコンパイラにまかせる(既定)
+// 필드 배치 순서는 컴파일러에 맡깁니다(기본값)
 #[allow(dead_code)]
 struct Auto {
     a: u8,
@@ -8,7 +8,7 @@ struct Auto {
     c: u16,
 }
 
-// C言語と同じ規則: 宣言順に、アラインメントを守って並べる
+// C와 같은 규칙: 선언 순서를 유지하면서 정렬 조건에 맞춰 배치합니다
 #[allow(dead_code)]
 #[repr(C)]
 struct CLayout {
@@ -19,7 +19,7 @@ struct CLayout {
 
 fn main() {
     println!(
-        "既定     : size = {:2} bytes, align = {} bytes",
+        "기본값   : size = {:2} bytes, align = {} bytes",
         size_of::<Auto>(),
         align_of::<Auto>()
     );
