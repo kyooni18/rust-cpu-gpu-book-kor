@@ -1,5 +1,5 @@
-//! 26章: GPUのタイムスタンプクエリで「カーネルだけの時間」を測る。
-//! 実行: cd examples && cargo run --release -p ch26-timestamp
+//! 26장: GPU 타임스탬프 쿼리로 커널 자체의 실행 시간을 측정합니다.
+//! 실행: cd examples && cargo run --release -p ch26-timestamp
 
 use std::num::NonZeroU64;
 use std::time::Instant;
@@ -11,10 +11,10 @@ fn main() {
     let instance = wgpu::Instance::new(wgpu::InstanceDescriptor::new_without_display_handle());
     let adapter =
         pollster::block_on(instance.request_adapter(&wgpu::RequestAdapterOptions::default()))
-            .expect("GPUが見つかりません");
+            .expect("GPU를 찾을 수 없습니다");
     println!("GPU: {}", adapter.get_info().name);
     if !adapter.features().contains(wgpu::Features::TIMESTAMP_QUERY) {
-        println!("このGPUはタイムスタンプクエリに対応していません");
+        println!("이 GPU는 타임스탬프 쿼리를 지원하지 않습니다");
         return;
     }
     let (device, queue) = pollster::block_on(adapter.request_device(&wgpu::DeviceDescriptor {
@@ -25,9 +25,9 @@ fn main() {
         memory_hints: wgpu::MemoryHints::MemoryUsage,
         trace: wgpu::Trace::Off,
     }))
-    .expect("デバイスの作成に失敗");
+    .expect("Device 생성에 실패했습니다");
 
-    // 計測対象: ch24と同じ要素ごとのハッシュ反復(16M要素)
+    // 측정 대상: 24장과 같은 원소별 해시 반복 작업(16M 원소)
     let shader = r#"
 @group(0) @binding(0) var<storage, read> input: array<u32>;
 @group(0) @binding(1) var<storage, read_write> output: array<u32>;
@@ -97,8 +97,8 @@ fn work(@builtin(workgroup_id) wgid: vec3<u32>, @builtin(local_invocation_id) li
         cache: None,
     });
 
-    // ---- タイムスタンプクエリの道具立て ----
-    // パスの開始と終了で「GPU自身の時計」を記録する
+    // ---- 타임스탬프 쿼리 준비 ----
+    // 컴퓨트 패스의 시작과 끝에서 GPU 자체의 시계를 기록합니다
     let query_set = device.create_query_set(&wgpu::QuerySetDescriptor {
         label: None,
         ty: wgpu::QueryType::Timestamp,
@@ -118,8 +118,8 @@ fn work(@builtin(workgroup_id) wgid: vec3<u32>, @builtin(local_invocation_id) li
     });
 
     let groups = ((N / 256).div_ceil(256)) as u32;
-    // (大きい仕事, 小さい仕事) それぞれで ウォームアップ1回 + 計測3回
-    for (label, gx, gy) in [("16M要素", 256u32, groups), ("256要素 ", 1, 1)] {
+    // 큰 작업과 작은 작업 각각에 대해 워밍업 한 번 + 측정 세 번을 수행합니다
+    for (label, gx, gy) in [("16M 원소", 256u32, groups), ("256 원소", 1, 1)] {
     for round in 0..4 {
         let wall = Instant::now();
         let mut encoder = device.create_command_encoder(&wgpu::CommandEncoderDescriptor::default());
@@ -141,7 +141,7 @@ fn work(@builtin(workgroup_id) wgid: vec3<u32>, @builtin(local_invocation_id) li
         queue.submit([encoder.finish()]);
 
         let slice = buf_ts_read.slice(..);
-        slice.map_async(wgpu::MapMode::Read, |r| r.expect("map失敗"));
+        slice.map_async(wgpu::MapMode::Read, |r| r.expect("매핑에 실패했습니다"));
         device.poll(wgpu::PollType::wait_indefinitely()).unwrap();
         let wall_time = wall.elapsed();
 
@@ -152,12 +152,12 @@ fn work(@builtin(workgroup_id) wgid: vec3<u32>, @builtin(local_invocation_id) li
         };
         buf_ts_read.unmap();
 
-        // タイムスタンプの目盛り(tick)をナノ秒に換算する係数
+        // 타임스탬프의 tick을 나노초로 환산하는 계수를 사용합니다
         let period_ns = queue.get_timestamp_period() as f64;
         let kernel_ms = (t1.wrapping_sub(t0)) as f64 * period_ns / 1e6;
         if round > 0 {
             println!(
-                "{label} カーネル(GPU時計): {kernel_ms:8.4}ms | 壁時計(submit→完了待ち): {:8.4}ms",
+                "{label} 커널(GPU 시계): {kernel_ms:8.4}ms | 벽시계(submit→완료 대기): {:8.4}ms",
                 wall_time.as_secs_f64() * 1e3
             );
         }
