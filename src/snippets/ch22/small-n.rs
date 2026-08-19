@@ -3,7 +3,7 @@ use std::hint::black_box;
 use std::time::Instant;
 
 fn main() {
-    // 要素32個の小さな表を1000万回引く
+    // 원소 32개의 작은 테이블을 1,000만 번 조회합니다
     let n = 32u64;
     let lookups = 10_000_000;
     let pairs: Vec<(u64, u64)> = (0..n).map(|i| (i * 7 % 64, i)).collect();
@@ -15,7 +15,7 @@ fn main() {
         let q = black_box(i as u64 % 64);
         if let Some(&v) = map.get(&q) { sum = sum.wrapping_add(v); }
     }
-    println!("HashMap    : {:>9.3?} (sum={sum})", start.elapsed());
+    println!("HashMap       : {:>9.3?} (sum={sum})", start.elapsed());
 
     let start = Instant::now();
     let mut sum = 0u64;
@@ -25,5 +25,5 @@ fn main() {
             sum = sum.wrapping_add(v);
         }
     }
-    println!("Vec線形探索: {:>9.3?} (sum={sum})", start.elapsed());
+    println!("Vec 선형 탐색: {:>9.3?} (sum={sum})", start.elapsed());
 }
