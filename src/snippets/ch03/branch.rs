@@ -1,6 +1,6 @@
 use std::time::Instant;
 
-// 疑似乱数(外部クレートなし)
+// 의사 난수(외부 크레이트 없이 사용)
 fn xorshift(state: &mut u64) -> u64 {
     *state ^= *state << 13;
     *state ^= *state >> 7;
@@ -17,8 +17,8 @@ fn main() {
     let mut sorted = unsorted.clone();
     sorted.sort_unstable();
 
-    // まったく同じコードを、並び順だけ違う同じ内容のデータに適用する
-    for (name, data) in [("未ソート", &unsorted), ("ソート済", &sorted)] {
+    // 내용은 같은 데이터에 완전히 같은 코드를 적용하고 순서만 바꿔 비교합니다
+    for (name, data) in [("정렬 안 됨", &unsorted), ("정렬됨", &sorted)] {
         let start = Instant::now();
         let mut sum = 0u64;
         for &v in data.iter() {
