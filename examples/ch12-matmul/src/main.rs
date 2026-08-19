@@ -1,6 +1,6 @@
-//! 12章: 同じ行列積を CPU(3方式) と GPU(3方式) で解く。
-//! 実行: cargo run --release -p ch12-matmul [-- n]
-//! n は32の倍数(既定: 1024)
+//! 12장: 같은 행렬 곱을 CPU 세 가지 방식과 GPU 세 가지 방식으로 계산합니다.
+//! 실행: cargo run --release -p ch12-matmul [-- n]
+//! n은 32의 배수입니다(기본값: 1024)
 
 use rayon::prelude::*;
 use std::num::NonZeroU64;
@@ -14,14 +14,14 @@ fn xorshift(state: &mut u64) -> u64 {
     *state
 }
 
-/// GFLOP/s を計算する(行列積の演算数は 2n^3)
+/// GFLOP/s를 계산합니다(행렬 곱의 연산 수는 2n^3입니다)
 fn gflops(n: usize, secs: f64) -> f64 {
     (2.0 * (n as f64).powi(3)) / secs / 1e9
 }
 
-// ---- CPU 版 ----
+// ---- CPU 버전 ----
 
-/// 素朴な3重ループ(ijk順)。B を列方向に読むためキャッシュに厳しい
+/// 단순한 3중 루프(ijk 순서). B를 열 방향으로 읽기 때문에 캐시에 불리합니다
 fn matmul_naive(a: &[f32], b: &[f32], c: &mut [f32], n: usize) {
     for i in 0..n {
         for j in 0..n {
@@ -34,7 +34,7 @@ fn matmul_naive(a: &[f32], b: &[f32], c: &mut [f32], n: usize) {
     }
 }
 
-/// ループ順を ikj に入れ替えた版。全アクセスが行方向(連続)になる
+/// 루프 순서를 ikj로 바꾼 버전입니다. 모든 접근이 행 방향(연속)으로 바뀝니다
 fn matmul_ikj(a: &[f32], b: &[f32], c: &mut [f32], n: usize) {
     c.fill(0.0);
     for i in 0..n {
@@ -49,7 +49,7 @@ fn matmul_ikj(a: &[f32], b: &[f32], c: &mut [f32], n: usize) {
     }
 }
 
-/// ikj 版を行単位で並列化した版
+/// ikj 버전을 행 단위로 병렬화합니다
 fn matmul_par(a: &[f32], b: &[f32], c: &mut [f32], n: usize) {
     c.par_chunks_mut(n).enumerate().for_each(|(i, c_row)| {
         c_row.fill(0.0);
@@ -63,7 +63,7 @@ fn matmul_par(a: &[f32], b: &[f32], c: &mut [f32], n: usize) {
     });
 }
 
-// ---- GPU 版 ----
+// ---- GPU 버전 ----
 
 struct Gpu {
     device: wgpu::Device,
@@ -83,7 +83,7 @@ impl Gpu {
             wgpu::Instance::new(wgpu::InstanceDescriptor::new_without_display_handle());
         let adapter =
             pollster::block_on(instance.request_adapter(&wgpu::RequestAdapterOptions::default()))
-                .expect("GPUが見つかりません");
+                .expect("GPU를 찾을 수 없습니다");
         println!("GPU: {}", adapter.get_info().name);
         let (device, queue) =
             pollster::block_on(adapter.request_device(&wgpu::DeviceDescriptor {
@@ -94,7 +94,7 @@ impl Gpu {
                 memory_hints: wgpu::MemoryHints::MemoryUsage,
                 trace: wgpu::Trace::Off,
             }))
-            .expect("デバイスの作成に失敗");
+            .expect("Device 생성에 실패했습니다");
 
         let module = device.create_shader_module(wgpu::include_wgsl!("matmul.wgsl"));
 
@@ -120,7 +120,7 @@ impl Gpu {
             usage: wgpu::BufferUsages::COPY_DST | wgpu::BufferUsages::MAP_READ,
             mapped_at_creation: false,
         });
-        let params = [u32::try_from(n).expect("n が u32 に収まりません"), 0, 0, 0];
+        let params = [u32::try_from(n).expect("n을 u32로 표현할 수 없습니다"), 0, 0, 0];
         let buf_params = device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
             label: Some("params"),
             contents: bytemuck::cast_slice(&params),
@@ -206,8 +206,8 @@ impl Gpu {
         }
     }
 
-    /// ディスパッチして完了まで待つ(計算のみ、読み出しなし)。
-    /// tile はワークグループ1つが受け持つ C の辺の長さ
+    /// 디스패치한 뒤 완료될 때까지 기다립니다(계산만 수행하고 결과는 읽지 않습니다).
+    /// tile은 워크그룹 하나가 담당하는 C 블록의 한 변 길이입니다
     fn dispatch(&self, pipeline: &wgpu::ComputePipeline, tile: usize) {
         let groups = (self.n / tile) as u32;
         let mut encoder = self
@@ -225,7 +225,7 @@ impl Gpu {
             .unwrap();
     }
 
-    /// 結果を CPU 側へ読み出す
+    /// 결과를 CPU 쪽으로 읽어옵니다
     fn read_c(&self) -> Vec<f32> {
         let mut encoder = self
             .device
@@ -234,7 +234,7 @@ impl Gpu {
         self.queue.submit([encoder.finish()]);
         let slice = self.buf_read.slice(..);
         slice.map_async(wgpu::MapMode::Read, |r| {
-            r.expect("バッファのマップに失敗しました");
+            r.expect("버퍼 매핑에 실패했습니다");
         });
         self.device
             .poll(wgpu::PollType::wait_indefinitely())
@@ -252,9 +252,9 @@ fn main() {
         .nth(1)
         .and_then(|s| s.parse().ok())
         .unwrap_or(1024);
-    assert!(n > 0 && n % 32 == 0, "n は32の倍数の正数にしてください");
-    // 4096^2 * 4B = 64MB。WebGPUのstorageバッファ既定上限(128MiB)に収める
-    assert!(n <= 4096, "n は4096以下にしてください");
+    assert!(n > 0 && n % 32 == 0, "n은 32의 배수인 양수여야 합니다");
+    // 4096^2 * 4B = 64MB. WebGPU의 storage 버퍼 기본 상한(128MiB) 안에 들어오게 제한합니다
+    assert!(n <= 4096, "n은 4096 이하여야 합니다");
     println!("n = {n} ({}MB × 3)\n", n * n * 4 / 1024 / 1024);
 
     let mut state = 0x2545_F491_4F6C_DD1D_u64;
@@ -288,7 +288,7 @@ fn main() {
     // ---- GPU ----
     let gpu = Gpu::new(&a, &b, n);
 
-    // 1回目はシェーダのコンパイルなど初回コストを含むので捨てる(ウォームアップ)
+    // 첫 실행에는 셰이더 컴파일 같은 초기 비용이 포함되므로 워밍업으로 버립니다
     gpu.dispatch(&gpu.pipeline_naive, 16);
 
     let start = Instant::now();
@@ -311,24 +311,24 @@ fn main() {
     println!("GPU blocked      : {t:>9.3?} ({:6.1} GFLOP/s)", gflops(n, t.as_secs_f64()));
     check("gpu blocked", &reference, &gpu.read_c());
 
-    // 転送込みの時間: データを送る→計算する→結果を読む、をまとめて測る
+    // 전송 포함 시간: 데이터 전달 → 계산 → 결과 읽기를 모두 묶어서 측정합니다
     let start = Instant::now();
     let gpu2 = Gpu::new(&a, &b, n);
     gpu2.dispatch(&gpu2.pipeline_blocked, 32);
     let c_gpu = gpu2.read_c();
     let t = start.elapsed();
-    println!("GPU blocked(初期化+転送込み): {t:>9.3?}");
+    println!("GPU blocked(초기화+전송 포함): {t:>9.3?}");
     check("gpu total", &reference, &c_gpu);
 }
 
-/// 浮動小数点の丸めの違いを許容して比較する
+/// 부동소수점 반올림 순서 차이를 허용하면서 결과를 비교합니다
 fn check(name: &str, reference: &[f32], result: &[f32]) {
-    assert_eq!(reference.len(), result.len(), "[{name}] 長さが一致しません");
+    assert_eq!(reference.len(), result.len(), "[{name}] 길이가 일치하지 않습니다");
     let mut ok = true;
     for (i, (&x, &y)) in reference.iter().zip(result).enumerate() {
         let tol = 1e-3 + 1e-4 * x.abs();
         if !y.is_finite() || (x - y).abs() > tol {
-            println!("  [{name}] 検証NG: index {i}: 期待 {x}, 実際 {y}");
+            println!("  [{name}] 검증 실패: index {i}: 기대값 {x}, 실제값 {y}");
             ok = false;
             break;
         }
