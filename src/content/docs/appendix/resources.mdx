@@ -1,84 +1,78 @@
 ---
-title: さらに学ぶには
-description: 本書の先へ進むための書籍、ドキュメント、ツールの案内。
+title: 더 배우려면
+description: 이 책 다음 단계로 이어질 책, 문서, 도구를 정리합니다.
 sidebar:
-  label: さらに学ぶには
+  label: 더 배우려면
 ---
 
-本書で扱った各分野を深めるための、定評ある資料を挙げます。
+이 책에서 다룬 각 분야를 더 깊게 공부할 때 참고하기 좋은 자료를 정리했습니다.
 
-## コンピュータアーキテクチャ全般
+## 컴퓨터 아키텍처 전반
 
-- **『コンピュータシステムの理論と実装』/ CS:APP** —
-  英語では *Computer Systems: A Programmer's Perspective* (Bryant & O'Hallaron)。
-  プログラマ視点でハードウェアを学ぶ定番の教科書です。
-  本書のPart Iを体系的に深めたい場合の第一候補です
+- **Computer Systems: A Programmer's Perspective (CS:APP)** (Bryant & O'Hallaron) —
+  프로그래머 관점에서 하드웨어와 시스템을 배우는 대표적인 교재입니다.
+  Part I의 내용을 더 체계적으로 공부하고 싶을 때 좋은 출발점입니다
 - [**What Every Programmer Should Know About Memory**](https://people.freebsd.org/~lstewart/articles/cpumemory.pdf)
-  (Ulrich Drepper) — メモリ階層とキャッシュについての古典的な論文です。
-  2007年の文書ですが、2章の内容の原典として今も読む価値があります
+  (Ulrich Drepper) — 메모리 계층과 캐시에 관한 고전적인 글입니다.
+  2007년에 작성됐지만 2장의 주제를 더 깊게 이해하는 데 여전히 가치가 있습니다
 - [**Agner Fog's optimization manuals**](https://www.agner.org/optimize/) —
-  x86の命令レイテンシ表や最適化技法の網羅的資料。
-  アセンブリレベルの最適化に踏み込むなら必携です
+  x86 명령어 지연 시간과 저수준 최적화 기법을 폭넓게 다룹니다.
+  어셈블리 수준까지 파고들고 싶을 때 매우 유용합니다
 
-## Rustの性能
+## Rust 성능
 
 - [**The Rust Performance Book**](https://nnethercote.github.io/perf-book/) —
-  Rustの性能改善手法を簡潔にまとめた無料の電子書籍です。
-  本書のPart IIの実務的な補完として最適です
+  Rust 성능 개선 기법을 간결하게 정리한 무료 전자책입니다.
+  이 책의 Part II를 실무적으로 보완하기 좋습니다
 - [**Rust Atomics and Locks**](https://marabos.nl/atomics/) (Mara Bos) —
-  5章で「1冊の本になる」と書いた、アトミックとメモリオーダリングの
-  その1冊です。無料公開されています
+  원자적 연산과 메모리 오더링을 깊게 다루는 무료 공개 책입니다.
+  5장과 17장의 내용을 더 자세히 공부하기 좋습니다
 - [**The Rustonomicon**](https://doc.rust-lang.org/nomicon/) —
-  unsafe Rustの公式ガイド。`get_unchecked`などに手を出す前に
+  unsafe Rust를 다루는 공식 가이드입니다. `get_unchecked` 같은 저수준 API를 사용하기 전에 읽을 가치가 있습니다
 
-## 計測ツール
+## 측정 도구
 
-- [criterion](https://github.com/bheisler/criterion.rs) — ベンチマーク(8章)
-- [samply](https://github.com/mstange/samply) — プロファイラ(8章)
-- [cargo-show-asm](https://github.com/pacak/cargo-show-asm) — アセンブリ表示(8章)
-- [Compiler Explorer](https://godbolt.org/) — ブラウザでアセンブリ確認(1章)
-- [cargo-flamegraph](https://github.com/flamegraph-rs/flamegraph) — フレームグラフ生成
+- [criterion](https://github.com/bheisler/criterion.rs) — 벤치마크(8장)
+- [samply](https://github.com/mstange/samply) — 프로파일러(8장)
+- [cargo-show-asm](https://github.com/pacak/cargo-show-asm) — 어셈블리 확인(8장)
+- [Compiler Explorer](https://godbolt.org/) — 브라우저에서 어셈블리 비교(1장)
+- [cargo-flamegraph](https://github.com/flamegraph-rs/flamegraph) — 플레임 그래프 생성
 
 ## GPU
 
-- [**WebGPU仕様**](https://www.w3.org/TR/webgpu/) /
-  [**WGSL仕様**](https://www.w3.org/TR/WGSL/) — 一次情報です
+- [**WebGPU 사양**](https://www.w3.org/TR/webgpu/) /
+  [**WGSL 사양**](https://www.w3.org/TR/WGSL/) — 가장 직접적인 1차 자료입니다
 - [**Learn wgpu**](https://sotrh.github.io/learn-wgpu/) —
-  wgpuの定番チュートリアル。グラフィックス寄りですが、
-  11章の先へ進むのに適しています
-- [**wgpu公式サンプル**](https://github.com/gfx-rs/wgpu/tree/trunk/examples) —
-  本書のコードもここのhello-computeを出発点にしています
-- **CUDA C++ Programming Guide** (NVIDIA) — CUDAに進む場合の一次資料。
-  ワープ、共有メモリ、コアレッシングなど、9〜10章の概念の
-  NVIDIA版の詳細が学べます
+  wgpu의 대표적인 튜토리얼입니다. 그래픽스 중심이지만 11장 이후로 넘어가기 좋습니다
+- [**wgpu 공식 예제**](https://github.com/gfx-rs/wgpu/tree/trunk/examples) —
+  이 책의 GPU 코드도 공식 예제에서 많은 구조를 참고했습니다
+- **CUDA C++ Programming Guide** (NVIDIA) — CUDA를 공부할 때 가장 중요한 1차 자료입니다.
+  워프, 공유 메모리, 코얼레싱처럼 9~10장에서 다룬 개념을 NVIDIA 관점에서 자세히 설명합니다
 - [**burn**](https://burn.dev/) / [**candle**](https://github.com/huggingface/candle) —
-  Rustの機械学習フレームワーク。「行列演算を速くしたいだけ」なら
-  自作カーネルより先にこちらを検討してください
+  Rust 머신러닝 프레임워크입니다. 단순히 행렬 연산을 빠르게 수행하는 것이 목적이라면 직접 커널을 작성하기 전에 검토할 만합니다
 
-## 応用編の先へ
+## 응용편 다음 단계
 
 - **Computer Architecture: A Quantitative Approach** (Hennessy & Patterson) —
-  アーキテクチャの定量的研究の standard。Part IVの先の世界です
-- [**Operating Systems: Three Easy Pieces**](https://pages.cs.wisc.edu/~remzi/OSTEP/)
-  (OSTEP) — 仮想メモリ(14章)とOSの層(27章)を体系的に学ぶ
-  無料公開の教科書です
-- **Systems Performance** (Brendan Gregg) — 27〜28章の実務面
-  (計測・OS・クラウド)の決定版です
+  컴퓨터 아키텍처를 정량적으로 연구하는 대표적인 교재입니다. Part IV 이후 내용을 더 깊게 다룹니다
+- [**Operating Systems: Three Easy Pieces**](https://pages.cs.wisc.edu/~remzi/OSTEP/) (OSTEP) —
+  가상 메모리(14장)와 OS 계층(27장)을 체계적으로 공부할 수 있는 무료 공개 교재입니다
+- **Systems Performance** (Brendan Gregg) —
+  27~28장의 실무 주제인 성능 측정, OS, 클라우드 성능 분석을 깊게 다룹니다
 - **Programming Massively Parallel Processors** (Hwu, Kirk & Hajj) —
-  Part VIのカーネル最適化をCUDAで深める定番教科書です
+  Part VI의 GPU 커널 최적화를 CUDA로 더 깊게 공부할 때 널리 사용되는 교재입니다
 - [**Async Book**](https://rust-lang.github.io/async-book/) /
-  [tokioチュートリアル](https://tokio.rs/tokio/tutorial) — 19章の先の
-  async実務です
-- [crossbeam](https://github.com/crossbeam-rs/crossbeam) — 17章の
-  ロックフリー既製品。[HdrHistogram](https://github.com/HdrHistogram/HdrHistogram_rust) —
-  28章のレイテンシ分布計測の定番です
-- [iai-callgrind](https://github.com/iai-callgrind/iai-callgrind) —
-  命令数ベースの安定したベンチマーク(28章)
+  [tokio 튜토리얼](https://tokio.rs/tokio/tutorial) — 19장 이후의 async 실무를 이어서 공부하기 좋습니다
+- [crossbeam](https://github.com/crossbeam-rs/crossbeam) — 17장에서 다룬 동시성 자료구조와 메모리 회수 도구를 제공합니다
+- [HdrHistogram](https://github.com/HdrHistogram/HdrHistogram_rust) — 28장의 지연 시간 분포 측정에 널리 사용됩니다
+- [iai-callgrind](https://github.com/iai-callgrind/iai-callgrind) — 명령어 수 기반의 안정적인 벤치마크 도구입니다(28장)
 
-## 本書のコードについて
+## 이 책의 코드
 
-本書のすべての実行可能コードは、リポジトリの`src/snippets/`
-(ブラウザ実行対応)と`examples/`(ローカル実行、GPU含む)にあります。
-数値は筆者の環境(Apple M4 / Rust Playground)での実測であり、
-環境が違えば数字も変わります。ぜひ手元で再計測してください。
-それこそが8章で学んだことの実践です。
+이 책에서 실행할 수 있는 코드는 저장소의 `src/snippets/`와 `examples/`에 있습니다.
+`src/snippets/`는 브라우저 실행을 위한 코드이고, `examples/`는 로컬 실행과 GPU 예제를 포함합니다.
+
+책에 나온 수치는 저자의 Apple M4 및 Rust Playground 환경에서 측정한 값입니다.
+하드웨어와 실행 환경이 달라지면 결과도 달라집니다.
+직접 자신의 환경에서 다시 측정해 보세요.
+그 과정 자체가 8장에서 배운 성능 측정 원칙의 실천입니다.
