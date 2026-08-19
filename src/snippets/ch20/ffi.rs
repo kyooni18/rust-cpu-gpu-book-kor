@@ -3,9 +3,9 @@ use std::time::Instant;
 
 use std::ffi::c_long;
 
-// Cライブラリの関数を直接宣言する(labs = C言語のlongの絶対値)。
-// Cのlongの幅はOS依存(64bit Linux/macOSでは64bit、Windowsでは32bit)
-// なので、対応するRust型 c_long を使う
+// C 라이브러리 함수를 직접 선언합니다(labs = C의 long 절댓값 함수).
+// C의 long 폭은 OS에 따라 다릅니다(64비트 Linux/macOS에서는 64비트, Windows에서는 32비트).
+// 따라서 대응하는 Rust 타입인 c_long을 사용합니다
 unsafe extern "C" {
     fn labs(x: c_long) -> c_long;
 }
@@ -13,7 +13,7 @@ unsafe extern "C" {
 fn main() {
     let n = 100_000_000i64;
 
-    // (1) Rustの .abs() : インライン化され、ベクトル化もされうる
+    // (1) Rust의 .abs(): 인라이닝되고 벡터화될 수도 있습니다
     let start = Instant::now();
     let mut sum = 0i64;
     for i in -n / 2..n / 2 {
@@ -21,7 +21,7 @@ fn main() {
     }
     println!("Rust abs : {:>9.3?} (sum={sum})", start.elapsed());
 
-    // (2) C関数へのFFI呼び出し: 呼び出し境界を毎回越える
+    // (2) C 함수 FFI 호출: 매번 호출 경계를 넘습니다
     let start = Instant::now();
     let mut sum = 0i64;
     for i in -n / 2..n / 2 {
