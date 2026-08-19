@@ -2,15 +2,15 @@
 import { Code } from '@astrojs/starlight/components';
 
 interface Props {
-  /** 実行するRustコード。`?raw` インポートで渡すこと */
+  /** 실행할 Rust 코드입니다. `?raw` import로 전달합니다 */
   code: string;
-  /** Rust のリリースチャンネル */
+  /** Rust 릴리스 채널 */
   channel?: 'stable' | 'beta' | 'nightly';
-  /** ビルドモード */
+  /** 빌드 모드 */
   mode?: 'debug' | 'release';
-  /** エディション */
+  /** 에디션 */
   edition?: '2015' | '2018' | '2021' | '2024';
-  /** コードブロックに表示するタイトル */
+  /** 코드 블록에 표시할 제목 */
   title?: string;
 }
 
@@ -36,13 +36,13 @@ const playgroundUrl = `https://play.rust-lang.org/?version=${channel}&mode=${mod
   <textarea class="rust-play__editor" spellcheck="false">{src}</textarea>
   <div class="rust-play__toolbar">
     <button class="rust-play__btn rust-play__btn--run" type="button">
-      ▶ 実行
+      ▶ 실행
     </button>
     <button class="rust-play__btn rust-play__btn--edit" type="button">
-      編集
+      편집
     </button>
     <button class="rust-play__btn rust-play__btn--reset" type="button" hidden>
-      リセット
+      초기화
     </button>
     <span class="spacer"></span>
     <span class="rust-play__meta">{channel} / {mode}</span>
@@ -50,7 +50,7 @@ const playgroundUrl = `https://play.rust-lang.org/?version=${channel}&mode=${mod
       class="rust-play__link"
       href={playgroundUrl}
       target="_blank"
-      rel="noopener noreferrer">Playgroundで開く ↗</a
+      rel="noopener noreferrer">Playground에서 열기 ↗</a
     >
   </div>
   <pre class="rust-play__output" aria-live="polite"></pre>
@@ -84,12 +84,12 @@ const playgroundUrl = `https://play.rust-lang.org/?version=${channel}&mode=${mod
     const editor = q<HTMLTextAreaElement>(root, '.rust-play__editor');
     const editBtn = q<HTMLButtonElement>(root, '.rust-play__btn--edit');
     const resetBtn = q<HTMLButtonElement>(root, '.rust-play__btn--reset');
-    // 実行中の編集を防ぐ(古いコードの結果が新しいコードの出力に見えるのを避ける)
+    // 실행 중에는 편집을 막습니다. 이전 코드의 결과가 새 코드의 출력처럼 보이는 것을 방지합니다
     btn.disabled = true;
     editor.readOnly = true;
     editBtn.disabled = true;
     resetBtn.disabled = true;
-    setOutput(root, ['コンパイルと実行中…（play.rust-lang.org を利用）']);
+    setOutput(root, ['컴파일 및 실행 중… (play.rust-lang.org 사용)']);
     try {
       const res = await fetch(API, {
         method: 'POST',
@@ -112,8 +112,8 @@ const playgroundUrl = `https://play.rust-lang.org/?version=${channel}&mode=${mod
         stderr: string;
       };
       const nodes: (HTMLElement | string)[] = [];
-      // コンパイラの警告・エラーは stderr に入る。Cargo自身の進行表示
-      // (Compiling/Finished/Running)だけを取り除いて表示する
+      // 컴파일러 경고와 오류는 stderr에 들어갑니다. Cargo 자체의 진행 표시
+      // (Compiling/Finished/Running)만 제거한 뒤 보여 줍니다
       const stderr = data.stderr
         .split('\n')
         .filter(
@@ -131,13 +131,13 @@ const playgroundUrl = `https://play.rust-lang.org/?version=${channel}&mode=${mod
         if (nodes.length > 0) nodes.push('\n\n');
         nodes.push(span('error', data.exitDetail));
       }
-      if (nodes.length === 0) nodes.push('（出力はありません）');
+      if (nodes.length === 0) nodes.push('(출력 없음)');
       setOutput(root, nodes);
     } catch (err) {
       setOutput(root, [
         span(
           'error',
-          `実行環境に接続できませんでした: ${err instanceof Error ? err.message : String(err)}`
+          `실행 환경에 연결하지 못했습니다: ${err instanceof Error ? err.message : String(err)}`
         ),
       ]);
     } finally {
@@ -174,8 +174,8 @@ const playgroundUrl = `https://play.rust-lang.org/?version=${channel}&mode=${mod
     else if (target.closest('.rust-play__btn--reset')) resetEdit(root);
   });
 
-  // 編集後は「Playgroundで開く」リンクも現在のコードを反映する
-  // (click のキャプチャ段階なら、キーボード操作でも遷移前に書き換えられる)
+  // 편집한 뒤에는 "Playground에서 열기" 링크도 현재 코드 내용을 반영합니다.
+  // click의 캡처 단계에서 갱신하면 키보드 조작에서도 이동 전에 링크를 바꿀 수 있습니다
   document.addEventListener(
     'click',
     (e) => {
